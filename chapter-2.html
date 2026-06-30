@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Chapter 2 — Brew Data + Record Keeping</title>
+<title>Chapter 2: Brew Data + Record Keeping</title>
   <!-- seo:meta -->
   <meta name="description" content="An AI tool is only as good as the brewing records behind it. What to capture, how to keep it clean, and when to trust it." />
   <link rel="canonical" href="https://ankurnapa.github.io/brewing-distilling-ai/chapter-2.html" />
@@ -61,15 +61,15 @@
 
       <p class="lead">Your brew log is a dataset. Treat it like one and almost every useful thing AI can do for your brewery becomes possible. Treat it casually, and even the best tool will quietly mislead you.</p>
 
-      <p>This is the least glamorous chapter and the most important. Nothing downstream — prediction, consistency checks, searching your own knowledge — works without records that are complete, consistent, and honest.</p>
+      <p>This is the least glamorous chapter and the most important. Nothing downstream (prediction, consistency checks, searching your own knowledge) works without records that are complete, consistent, and honest.</p>
 
       <h2>What data does brewing AI actually need?</h2>
       <p>You do not need a sensor on every valve. You need the handful of fields that describe each batch well enough to compare it to the next. For most breweries that is:</p>
       <ul>
-        <li><strong>Recipe inputs</strong> — grain bill, hops, yeast strain and pitch rate, water profile, adjuncts, with quantities.</li>
-        <li><strong>Process</strong> — mash temperatures and times, boil length, fermentation temperature curve, dry-hop timing.</li>
-        <li><strong>Measurements</strong> — OG, FG, ABV, pH, IBU or bitterness where you have it, dates and tank IDs.</li>
-        <li><strong>Outcome</strong> — sensory notes, pass/fail against your quality definition from Chapter 1, and anything unusual that happened.</li>
+        <li><strong>Recipe inputs</strong>: grain bill, hops, yeast strain and pitch rate, water profile, adjuncts, with quantities.</li>
+        <li><strong>Process</strong>: mash temperatures and times, boil length, fermentation temperature curve, dry-hop timing.</li>
+        <li><strong>Measurements</strong>: OG, FG, ABV, pH, IBU or bitterness where you have it, dates and tank IDs.</li>
+        <li><strong>Outcome</strong>: sensory notes, pass/fail against your quality definition from Chapter 1, and anything unusual that happened.</li>
       </ul>
 
       <div class="box key">
@@ -78,7 +78,7 @@
       </div>
 
       <h2>Capture it cleanly</h2>
-      <p>Messy records are not just untidy — they actively break tools. A model cannot tell that "Maris", "Maris Otter", and "MO" are the same malt, or that one batch logged gravity in Plato and the next in specific gravity. A few habits prevent most of the damage:</p>
+      <p>Messy records are not just untidy, they actively break tools. A model cannot tell that "Maris", "Maris Otter", and "MO" are the same malt, or that one batch logged gravity in Plato and the next in specific gravity. A few habits prevent most of the damage:</p>
       <ul>
         <li><strong>One unit per field, always.</strong> Pick Plato or SG, Celsius or Fahrenheit, and never mix them in the same column.</li>
         <li><strong>Consistent names.</strong> Spell ingredients and yeast strains the same way every time. A short pick-list beats free text.</li>
@@ -89,7 +89,7 @@
       <h2>Evaluate whether your data is any good</h2>
       <p>Before trusting any answer built on your records, ask whether the records deserve that trust. Three quick checks catch most problems:</p>
       <h3>Gaps</h3>
-      <p>How many batches are missing a final gravity, a fermentation temperature, or a sensory note? A tool will happily ignore the gaps and give you a confident answer based on the half of the data that is complete — which may not be representative.</p>
+      <p>How many batches are missing a final gravity, a fermentation temperature, or a sensory note? A tool will happily ignore the gaps and give you a confident answer based on the half of the data that is complete, which may not be representative.</p>
       <h3>Errors</h3>
       <p>Scan for impossible values: an FG above the OG, a 9% ABV on a session recipe, a mash at 9 degrees. These are usually typos, but a tool reads them as fact.</p>
       <h3>Bias</h3>
@@ -97,7 +97,7 @@
 
       <div class="box try">
         <span class="label">Try this in your brewery</span>
-        <p>Export your last 20 batches into one sheet, one row each. Highlight every empty cell and every value that looks impossible. The pattern of what is missing — and which beers it is missing for — tells you exactly where your records are not yet ready for a tool to lean on.</p>
+        <p>Export your last 20 batches into one sheet, one row each. Highlight every empty cell and every value that looks impossible. The pattern of what is missing (and which beers it is missing for) tells you exactly where your records are not yet ready for a tool to lean on.</p>
       </div>
 
       <h2>Start small</h2>
@@ -106,7 +106,7 @@
       <h2>Takeaways</h2>
       <ul>
         <li>Your brew log is a dataset; its quality sets the ceiling on what any tool can do.</li>
-        <li>Capture inputs, process, measurements, and — above all — honest outcomes.</li>
+        <li>Capture inputs, process, measurements, and (above all) honest outcomes.</li>
         <li>One unit per field, consistent names, dates and IDs on everything.</li>
         <li>Check for gaps, impossible values, and the missing failures before you trust a result.</li>
       </ul>
