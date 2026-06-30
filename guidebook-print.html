@@ -1,0 +1,395 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/>
+<title>Brewing + AI Guidebook</title>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+  @page { size: A4; margin: 20mm 18mm; }
+  * { box-sizing: border-box; }
+  body { font-family: "Open Sans", Helvetica, Arial, sans-serif; color: #2c2722; line-height: 1.55; font-size: 11pt; margin: 0; }
+  .cover { height: 257mm; display: flex; flex-direction: column; justify-content: center; page-break-after: always; padding: 0 6mm; }
+  .cover .kicker { font-family: "Poppins", sans-serif; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#ff4081; font-size:11pt; margin-bottom: 10mm; }
+  .cover h1 { font-family: "Poppins", sans-serif; font-weight:600; font-size:34pt; line-height:1.05; color:#06483f; margin:0 0 8mm; }
+  .cover p { font-size:13pt; color:#4a4a4a; max-width: 130mm; }
+  .cover .meta { margin-top: 14mm; color:#6b5847; font-size: 10pt; }
+  .chapter { page-break-before: always; }
+  .ch-head { border-bottom: 2px solid #f0f6f5; padding-bottom: 5mm; margin-bottom: 7mm; }
+  .ch-eyebrow { font-family:"Poppins",sans-serif; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:#ff4081; font-size:9pt; margin-bottom:3mm; }
+  .ch-head h1 { font-family:"Poppins",sans-serif; font-weight:600; font-size:22pt; color:#06483f; margin:0; }
+  h2 { font-family:"Poppins",sans-serif; font-weight:600; font-size:14pt; color:#00695c; margin:7mm 0 2mm; }
+  h3 { font-family:"Poppins",sans-serif; font-weight:600; font-size:11.5pt; color:#2c2722; margin:5mm 0 1mm; }
+  p { margin:0 0 3mm; }
+  .lead { font-size:12.5pt; color:#1c1814; margin-bottom:4mm; }
+  ul { margin:0 0 4mm 5mm; } li { margin-bottom:1.5mm; }
+  strong { color:#1c1814; }
+  .box { border-radius: 3mm; padding: 4mm 5mm; margin: 4mm 0; page-break-inside: avoid; }
+  .box .label { font-family:"Poppins",sans-serif; font-weight:600; font-size:8pt; letter-spacing:0.8px; text-transform:uppercase; display:block; margin-bottom:2mm; }
+  .box.try { background:#f0f6f5; } .box.try .label { color:#00695c; }
+  .box.key { background:#fff4f8; } .box.key .label { color:#ff4081; }
+  .compare { display:flex; gap:4mm; margin:4mm 0; page-break-inside: avoid; }
+  .compare .col { flex:1; border-radius:2.5mm; padding:3.5mm 4mm; font-size:10pt; }
+  .compare .bad { background:#fbe9ee; } .compare .good { background:#e3f3ec; }
+  .compare .tag { font-family:"Poppins",sans-serif; font-weight:600; font-size:8pt; letter-spacing:0.6px; text-transform:uppercase; display:block; margin-bottom:1.5mm; }
+  .compare .bad .tag { color:#c23a63; } .compare .good .tag { color:#00695c; }
+</style></head><body>
+<section class="cover">
+  <div class="kicker">Brewing Distilling + AI</div>
+  <h1>The Brewing + AI Guidebook</h1>
+  <p>A practical, plain-language guide for brewers and distillers on using AI thoughtfully — clear goals, clean data, a realistic mental model, real verification, and a hand on the control.</p>
+  <div class="meta">Six chapters · ankurnapa.github.io/brewing-distilling-ai</div>
+</section>
+
+    <section class="chapter">
+      <div class="ch-head">
+        <div class="ch-eyebrow">Chapter 01</div>
+        <h1>Brewing Goals + Defining Quality</h1>
+      </div>
+      
+    
+
+      <p class="lead">It is tempting to start with the technology: which app, which model, which dashboard. That is the wrong end to start from. AI is only useful once you can say, in plain words, what you are trying to achieve and how you will know if you got there.</p>
+
+      <p>Brewers already do this instinctively at the kettle. You have a picture of the finished beer before the mill ever turns. This chapter is about making that picture explicit enough that a tool — or a new brewer, or your future self — could act on it.</p>
+
+      <h2>Start with the beer, not the tool</h2>
+      <p>A model does not know your house style. It has never tasted your water, your yeast, or the pale ale your regulars come back for. If you ask it to "improve my recipe" without a goal, it will give you a confident, generic answer that may have nothing to do with the beer you actually want.</p>
+      <p>So the first job is not technical at all. It is to write down what success looks like, in terms you could measure or taste.</p>
+
+      <h2>What "good" can mean</h2>
+      <p>Quality is never a single number. For most breweries it is a balance of four things, and naming which ones matter most for a given beer is half the work:</p>
+      <ul>
+        <li><strong>Flavor target</strong> — the sensory profile you are aiming for: balance, key descriptors, what must be present and what must be absent.</li>
+        <li><strong>Consistency</strong> — how close batch ten must taste to batch one. A flagship lager lives or dies on this; a one-off special does not.</li>
+        <li><strong>Cost</strong> — ingredient, energy, and labor cost per finished litre or hectolitre.</li>
+        <li><strong>Time</strong> — tank turns, time to package, how long a beer ties up capacity.</li>
+      </ul>
+      <p>A goal like "make it better" hides which of these you are willing to trade. "Hold the same flavor but shave two days off tank time" is something a tool, and a brewer, can actually work on.</p>
+
+      <div class="box key">
+        <span class="label">Key idea</span>
+        <p>A useful goal names a <strong>target</strong>, a <strong>measure</strong>, and a <strong>trade-off you accept</strong>. "Hit 4.8% ABV, clean fermentation, no diacetyl, without extending the lager by more than a day" is far more workable than "make a great lager."</p>
+      </div>
+
+      <h2>Write a quality definition you can check</h2>
+      <p>For each beer, a short, written quality definition turns vague intent into something you can hold an answer up against. It does not need to be long. A practical one covers:</p>
+      <ul>
+        <li><strong>Numbers and ranges</strong> — OG, FG, ABV, IBU, colour, pH, with acceptable spreads (for example FG 1.010 to 1.012, not a single point).</li>
+        <li><strong>Sensory descriptors</strong> — the three or four notes that must be there, and the off-flavors that are an automatic fail (diacetyl, DMS, acetaldehyde, oxidation).</li>
+        <li><strong>Pass / fail line</strong> — what sends a batch to sale, what sends it to blending, and what sends it down the drain.</li>
+      </ul>
+      <p>Once this exists, "is this AI suggestion any good?" has an answer. You check the suggestion against the definition instead of against a gut feeling you cannot share with your team.</p>
+
+      <h3>Vague goal vs. defined goal</h3>
+      <div class="compare">
+        <div class="col bad">
+          <span class="tag">Vague</span>
+          "Help me make a better IPA."
+        </div>
+        <div class="col good">
+          <span class="tag">Defined</span>
+          "Keep my IPA's hop character and 6.2% ABV, but reduce haze and lower my dry-hop cost by 15%. FG must stay 1.012 or below."
+        </div>
+      </div>
+      <p>The second version gives any tool — and any colleague — something to aim at, and gives you a clear way to judge what comes back.</p>
+
+      <h2>Where AI fits, once the goal is clear</h2>
+      <p>With a written goal and a quality definition in hand, AI stops being a magic box and becomes an assistant pointed at a specific job: suggest grain bills that hit a target gravity, flag which past batches drifted from spec, draft a tasting note, or talk through why a fermentation stalled. Every one of those is easier to judge because you already decided what good looks like.</p>
+
+      <div class="box try">
+        <span class="label">Try this in your brewery</span>
+        <p>Pick one flagship beer. In ten minutes, write its quality definition: target numbers with ranges, the must-have and must-not-have sensory notes, and the pass/fail line. Keep it to half a page. That single document is what makes every later chapter — data, trust, feedback — actually usable.</p>
+      </div>
+
+      <h2>Takeaways</h2>
+      <ul>
+        <li>Start with the beer and the goal, never with the tool.</li>
+        <li>"Good" is a balance of flavor, consistency, cost, and time — name which matter most for each beer.</li>
+        <li>A useful goal states a target, a measure, and a trade-off you accept.</li>
+        <li>A short written quality definition lets you judge any AI answer against something real.</li>
+      </ul>
+
+      
+    </section>
+    <section class="chapter">
+      <div class="ch-head">
+        <div class="ch-eyebrow">Chapter 02</div>
+        <h1>Brew Data + Record Keeping</h1>
+      </div>
+      
+    
+
+      <p class="lead">Your brew log is a dataset. Treat it like one and almost every useful thing AI can do for your brewery becomes possible. Treat it casually, and even the best tool will quietly mislead you.</p>
+
+      <p>This is the least glamorous chapter and the most important. Nothing downstream — prediction, consistency checks, searching your own knowledge — works without records that are complete, consistent, and honest.</p>
+
+      <h2>What data does brewing AI actually need?</h2>
+      <p>You do not need a sensor on every valve. You need the handful of fields that describe each batch well enough to compare it to the next. For most breweries that is:</p>
+      <ul>
+        <li><strong>Recipe inputs</strong> — grain bill, hops, yeast strain and pitch rate, water profile, adjuncts, with quantities.</li>
+        <li><strong>Process</strong> — mash temperatures and times, boil length, fermentation temperature curve, dry-hop timing.</li>
+        <li><strong>Measurements</strong> — OG, FG, ABV, pH, IBU or bitterness where you have it, dates and tank IDs.</li>
+        <li><strong>Outcome</strong> — sensory notes, pass/fail against your quality definition from Chapter 1, and anything unusual that happened.</li>
+      </ul>
+
+      <div class="box key">
+        <span class="label">Key idea</span>
+        <p>The most valuable column in your log is the <strong>outcome</strong>. Inputs and process tell a tool what you did; the outcome tells it what that did to the beer. Without honest outcomes, there is nothing to learn from.</p>
+      </div>
+
+      <h2>Capture it cleanly</h2>
+      <p>Messy records are not just untidy — they actively break tools. A model cannot tell that "Maris", "Maris Otter", and "MO" are the same malt, or that one batch logged gravity in Plato and the next in specific gravity. A few habits prevent most of the damage:</p>
+      <ul>
+        <li><strong>One unit per field, always.</strong> Pick Plato or SG, Celsius or Fahrenheit, and never mix them in the same column.</li>
+        <li><strong>Consistent names.</strong> Spell ingredients and yeast strains the same way every time. A short pick-list beats free text.</li>
+        <li><strong>Dates and IDs on everything.</strong> Every batch needs a date and a tank or batch number so events can be put in order.</li>
+        <li><strong>Record the misses.</strong> Stuck fermentations, infections, and dumped batches are some of the most useful data you have. Do not quietly delete them.</li>
+      </ul>
+
+      <h2>Evaluate whether your data is any good</h2>
+      <p>Before trusting any answer built on your records, ask whether the records deserve that trust. Three quick checks catch most problems:</p>
+      <h3>Gaps</h3>
+      <p>How many batches are missing a final gravity, a fermentation temperature, or a sensory note? A tool will happily ignore the gaps and give you a confident answer based on the half of the data that is complete — which may not be representative.</p>
+      <h3>Errors</h3>
+      <p>Scan for impossible values: an FG above the OG, a 9% ABV on a session recipe, a mash at 9 degrees. These are usually typos, but a tool reads them as fact.</p>
+      <h3>Bias</h3>
+      <p>If you only kept good records when a batch went well, your data quietly tells the tool that everything works. The failures that would teach it the most are missing.</p>
+
+      <div class="box try">
+        <span class="label">Try this in your brewery</span>
+        <p>Export your last 20 batches into one sheet, one row each. Highlight every empty cell and every value that looks impossible. The pattern of what is missing — and which beers it is missing for — tells you exactly where your records are not yet ready for a tool to lean on.</p>
+      </div>
+
+      <h2>Start small</h2>
+      <p>You do not need three years of perfect data to begin. A clean, consistent log of one beer over a dozen batches is more useful than a sprawling, contradictory archive of everything. Get the habit right on one flagship, prove it helps, then widen it.</p>
+
+      <h2>Takeaways</h2>
+      <ul>
+        <li>Your brew log is a dataset; its quality sets the ceiling on what any tool can do.</li>
+        <li>Capture inputs, process, measurements, and — above all — honest outcomes.</li>
+        <li>One unit per field, consistent names, dates and IDs on everything.</li>
+        <li>Check for gaps, impossible values, and the missing failures before you trust a result.</li>
+      </ul>
+
+      
+    </section>
+    <section class="chapter">
+      <div class="ch-head">
+        <div class="ch-eyebrow">Chapter 03</div>
+        <h1>Understanding the Tool</h1>
+      </div>
+      
+    
+
+      <p class="lead">Most bad experiences with AI come from a wrong mental model. People expect a calculator and get a confident colleague; or expect an expert and get a parrot. The truth sits in between, and naming it makes the tool far easier to use.</p>
+
+      <h2>A very well-read apprentice</h2>
+      <p>The most useful picture of a general AI tool is an apprentice who has read almost everything ever written about brewing — every textbook, forum, and brewing journal — but who has never set foot in your brewhouse. They are fast, tireless, and widely read. They have also never tasted a beer, never smelled a stuck fermentation, and never run your kit.</p>
+      <p>That single image predicts most of the tool's behavior. It is brilliant at recalling and explaining general knowledge, and weak at anything that depends on your specific equipment, water, and palate.</p>
+
+      <div class="box key">
+        <span class="label">Key idea</span>
+        <p>AI is strong on <strong>general, written-down knowledge</strong> and weak on <strong>your specific, tasted reality</strong>. You supply the brewhouse; it supplies the reading. Neither replaces the other.</p>
+      </div>
+
+      <h2>What it knows well</h2>
+      <ul>
+        <li>Explaining concepts: what diacetyl is, why a rest helps, how attenuation works.</li>
+        <li>Drafting and summarizing: tasting notes, SOPs, batch reports, supplier emails.</li>
+        <li>Doing the textbook arithmetic: rough gravity, ABV, strike-water, and dilution maths.</li>
+        <li>Talking through possibilities when a fermentation behaves oddly.</li>
+      </ul>
+
+      <h2>What it has never tasted</h2>
+      <ul>
+        <li>How <em>your</em> beer actually tastes, or what your regulars expect.</li>
+        <li>The quirks of your specific kit — that one tank that runs warm, your real mash efficiency.</li>
+        <li>Anything that happened after its training, including this season's hop crop.</li>
+        <li>Facts it does not have — which it may fill in with confident invention rather than admit.</li>
+      </ul>
+
+      <h2>Why the same question gives different answers</h2>
+      <p>Ask a model the same thing twice and you may get two different replies. This is not a fault; these tools are built to vary their wording, and they do not "remember" past brews unless you tell them in the conversation. Two consequences follow for brewers:</p>
+      <ul>
+        <li><strong>Do not treat an answer as a fixed fact.</strong> It is one plausible response, not the single correct readout of an instrument.</li>
+        <li><strong>Context lives in the conversation.</strong> If you do not give it your numbers and house style, it is working from generic knowledge every time.</li>
+      </ul>
+
+      <div class="box try">
+        <span class="label">Try this in your brewery</span>
+        <p>Ask the same brewing question twice in two fresh chats — once with no detail, once with your recipe, gravities, and equipment. Compare the four answers. You will see clearly where the tool is genuinely helpful and where it is just filling a vacuum with generic text.</p>
+      </div>
+
+      <h2>Setting expectations with your team</h2>
+      <p>If others in the brewery will use the tool, agree on the mental model out loud: it is a knowledgeable assistant for thinking and drafting, not an authority that decides what goes in the tank. That one sentence prevents both the fear ("it will replace us") and the over-trust ("the computer said so") that cause most problems.</p>
+
+      <h2>Takeaways</h2>
+      <ul>
+        <li>Picture a very well-read apprentice who has never tasted your beer.</li>
+        <li>Strong on general written knowledge; weak on your specific, tasted reality.</li>
+        <li>Answers vary and the tool has no memory of past brews unless you provide it.</li>
+        <li>Agree the mental model with your team to avoid both fear and over-trust.</li>
+      </ul>
+
+      
+    </section>
+    <section class="chapter">
+      <div class="ch-head">
+        <div class="ch-eyebrow">Chapter 04</div>
+        <h1>Trust + Verification</h1>
+      </div>
+      
+    
+
+      <p class="lead">The single most important habit in using AI well is separating how confident an answer <em>sounds</em> from how likely it is to be <em>true</em>. These tools are fluent by design, and fluency reads as authority even when the facts underneath are invented.</p>
+
+      <h2>Confident is not the same as correct</h2>
+      <p>A model will give you a precise strike-water temperature, a named enzyme, or a specific hop alpha figure in the same calm, assured tone whether it is right or guessing. It does not flag its own uncertainty the way an honest colleague would. So you cannot use tone as a signal. You have to bring the doubt yourself.</p>
+
+      <div class="box key">
+        <span class="label">Key idea</span>
+        <p>Treat every AI answer as a <strong>well-informed hypothesis from an apprentice</strong>, not a reading from an instrument. Hypotheses are useful — but you confirm them before you act, especially when a batch is on the line.</p>
+      </div>
+
+      <h2>Ask for the reasoning, not just the answer</h2>
+      <p>A bare number is hard to check. The reasoning behind it is much easier. Asking "walk me through how you got that" does two things: it lets you spot a wrong assumption, and it often makes the tool catch its own mistake. If the reasoning does not hold up against your brewing knowledge, the answer does not either, however confident it sounds.</p>
+
+      <h3>Watch for invented sources</h3>
+      <p>If an answer cites a study, a book, or a number, be especially careful. Models sometimes produce citations that look real but are not. Treat any specific reference as unverified until you have seen the source yourself.</p>
+
+      <h2>Verify against the brewhouse</h2>
+      <p>You have something the tool does not: the actual beer. Use it. The strongest verification is always physical:</p>
+      <ul>
+        <li><strong>Check the numbers</strong> against your own measurements and your quality definition from Chapter 1. Does the suggested FG match what your yeast actually does?</li>
+        <li><strong>Sanity-check with experience.</strong> If a suggestion contradicts what a hundred batches have taught you, your batches win.</li>
+        <li><strong>Test small before you scale.</strong> A trial batch, a bench addition, or a single tank is a cheap way to confirm an idea before it touches your flagship.</li>
+      </ul>
+
+      <h3>Match your scrutiny to the stakes</h3>
+      <p>Not everything needs the same caution. A draft tasting note or a brainstorm of style ideas is low risk — a wrong word costs nothing. A change to a fermentation schedule, a dilution calculation, or anything that affects safety, duty, or a full tank is high risk and deserves full verification every time.</p>
+
+      <div class="box try">
+        <span class="label">Try this in your brewery</span>
+        <p>Take one AI suggestion you would actually consider using. Before acting, write down: the number or claim, how you would check it, and what it would cost if it were wrong. If you cannot answer the second question, you are not ready to act on it yet.</p>
+      </div>
+
+      <h2>Takeaways</h2>
+      <ul>
+        <li>Confidence in the wording tells you nothing about correctness.</li>
+        <li>Ask for the reasoning; check it against your brewing knowledge.</li>
+        <li>Treat any citation as unverified until you have seen the source.</li>
+        <li>Verify against real measurements and small tests; scale your scrutiny to the stakes.</li>
+      </ul>
+
+      
+    </section>
+    <section class="chapter">
+      <div class="ch-head">
+        <div class="ch-eyebrow">Chapter 05</div>
+        <h1>Feedback + The Brewer's Hand</h1>
+      </div>
+      
+    
+
+      <p class="lead">Good use of AI looks like a conversation, not a vending machine. You ask, you judge, you correct, you ask again — and you stay the one who decides what actually happens to the beer. This chapter is about keeping that loop healthy.</p>
+
+      <h2>You are in the loop, on purpose</h2>
+      <p>The most reliable way to use these tools in a brewery is with a human in the loop at every decision point: the tool proposes, the brewer disposes. That is not a limitation to grow out of. For anything that touches the tank, your hand on the final call is the safety mechanism.</p>
+
+      <div class="box key">
+        <span class="label">Key idea</span>
+        <p>AI should <strong>widen your options and speed up your thinking</strong>, then step back. The moment a tool is quietly making a brewing decision no human reviewed, you have given away the thing that makes you a brewer.</p>
+      </div>
+
+      <h2>Steering: the first answer is a draft</h2>
+      <p>Treat the first reply as a starting point, never the finished article. The skill is in the correction:</p>
+      <ul>
+        <li><strong>Add what it missed.</strong> "You assumed 75% efficiency; mine runs 68%. Redo it." Specific corrections get specific improvements.</li>
+        <li><strong>Push back.</strong> "That would over-bitter it for my house style. Give me a gentler option." The tool will gladly revise.</li>
+        <li><strong>Narrow the scope.</strong> If an answer is generic, it usually means the question was. Add your numbers and constraints and ask again.</li>
+      </ul>
+
+      <h2>Build a control point into your workflow</h2>
+      <p>Decide in advance where the brewer's sign-off sits. A simple rule works: anything that changes a recipe, a schedule, a dilution, or anything affecting safety or duty gets a human review before it is acted on — no exceptions, no matter how confident the tool sounded. Low-stakes drafting can flow more freely.</p>
+
+      <h3>Feed your own knowledge back in</h3>
+      <p>The tool gets far more useful when you give it your context: your house numbers, your past batches, your quality definition. Over time, keeping a short reference you paste into conversations — your efficiencies, your yeast behavior, your standard processes — turns a generic apprentice into one that answers in your brewery's terms. You are not training the model; you are briefing it well, every time.</p>
+
+      <div class="box try">
+        <span class="label">Try this in your brewery</span>
+        <p>Write a short "house facts" note: your real mash efficiency, typical attenuation by yeast strain, water profile, and the three rules you never break. Paste it at the start of a brewing conversation and watch how much more specific and useful the answers become.</p>
+      </div>
+
+      <h2>Takeaways</h2>
+      <ul>
+        <li>Keep a human in the loop at every decision that touches the tank.</li>
+        <li>The first answer is a draft; correct, push back, and narrow it.</li>
+        <li>Define a clear control point where the brewer signs off before acting.</li>
+        <li>Brief the tool with your house facts so it answers in your brewery's terms.</li>
+      </ul>
+
+      
+    </section>
+    <section class="chapter">
+      <div class="ch-head">
+        <div class="ch-eyebrow">Chapter 06</div>
+        <h1>Mistakes + Red Flags</h1>
+      </div>
+      
+    
+
+      <p class="lead">Every tool fails in its own characteristic ways. Once you know how AI tends to get brewing wrong, the mistakes become predictable — and predictable mistakes are easy to catch before they cost you a batch.</p>
+
+      <h2>How AI gets brewing wrong</h2>
+      <ul>
+        <li><strong>Invented facts.</strong> It can state a hop alpha, an enzyme's rest temperature, or a yeast's attenuation with total confidence and be simply wrong. It would rather give a fluent answer than admit it does not know.</li>
+        <li><strong>Out-of-date knowledge.</strong> It does not know this season's harvest, a supplier's reformulation, or anything newer than its training. Brewing moves; the model's knowledge is frozen.</li>
+        <li><strong>Unit and scale slips.</strong> Mixing Plato and SG, Celsius and Fahrenheit, or grams and ounces; or giving homebrew-scale advice for a commercial batch.</li>
+        <li><strong>Fake citations.</strong> References and figures that look authoritative but do not exist.</li>
+        <li><strong>Losing the thread.</strong> In a long conversation it can forget a constraint you set earlier and contradict itself.</li>
+      </ul>
+
+      <div class="box key">
+        <span class="label">The red-flag checklist</span>
+        <ul>
+          <li>A suspiciously precise number with no working shown.</li>
+          <li>A confident claim about something recent or local.</li>
+          <li>A citation you cannot independently find.</li>
+          <li>Advice that ignores your scale, kit, or house style.</li>
+          <li>An answer that contradicts what your own batches have taught you.</li>
+          <li>Units that do not match the rest of your records.</li>
+        </ul>
+      </div>
+
+      <h2>Diagnose: the tool or the question?</h2>
+      <p>When an answer is wrong, it pays to know why before you give up or blame the tool. Usually it is one of two things:</p>
+      <ul>
+        <li><strong>The question was thin.</strong> A vague prompt with no brewing context gets a generic, often wrong answer. The fix is on your side: add your numbers, scale, and constraints and ask again. (Chapter 1 of the prompts guide covers this in detail.)</li>
+        <li><strong>The tool genuinely does not know.</strong> If the question is specific to your kit, your local ingredients, or very recent events, no amount of prompting will help. That is a job for your own measurement, not the model.</li>
+      </ul>
+
+      <h2>The safe way forward</h2>
+      <p>Catching a mistake is only half the job; handling it well is the other half:</p>
+      <ul>
+        <li><strong>Stop at the tank.</strong> A wrong answer that never gets acted on costs nothing. Your verification step (Chapter 4) and your control point (Chapter 5) are what keep it harmless.</li>
+        <li><strong>Correct and re-ask</strong> when the fault was a thin question.</li>
+        <li><strong>Fall back to your own knowledge and measurement</strong> when the tool is out of its depth. The beer is the final authority, always.</li>
+        <li><strong>Note the failure mode.</strong> Once you have seen the tool make a particular kind of mistake, you will spot it instantly next time.</li>
+      </ul>
+
+      <div class="box try">
+        <span class="label">Try this in your brewery</span>
+        <p>Deliberately ask the tool something it is likely to get wrong — a very recent fact, or a number specific to your kit. Watch how it answers anyway, with full confidence. That felt experience of a confident wrong answer is the best training your instincts can get.</p>
+      </div>
+
+      <h2>The throughline</h2>
+      <p>Across all six chapters the message is one thing: AI is a capable assistant and a poor authority. It will not taste your beer, pull your tanks, or replace an experienced brewer. The brewers and distillers who learn to use it thoughtfully and critically — clear goals, clean data, a realistic mental model, real verification, a hand on the control, and an eye for its mistakes — will get the most from it, while staying firmly in charge of the craft.</p>
+
+      <h2>Takeaways</h2>
+      <ul>
+        <li>AI fails predictably: invented facts, stale knowledge, unit slips, fake citations, lost context.</li>
+        <li>Run the red-flag checklist on any answer before acting.</li>
+        <li>Diagnose whether the fault is a thin question or a tool out of its depth.</li>
+        <li>Stop wrong answers at the tank; fall back to measurement; the beer is the final authority.</li>
+      </ul>
+
+      
+    </section>
+</body></html>
