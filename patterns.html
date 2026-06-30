@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Brewing + AI Guidebook — Patterns</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --color-teal: #00695c;
+    --color-teal-deep: #06483f;
+    --color-pink: #ff4081;
+    --color-ink: rgba(0, 0, 0, 0.87);
+    --color-text: #4a4a4a;
+    --color-fine: #3c4043;
+    --color-section: #f0f6f5;
+    --color-card-border: #d8e6e1;
+    --font-display: "Poppins", "Google Sans", Roboto, sans-serif;
+    --font-body: "Open Sans", Helvetica, sans-serif;
+    --max-width: 1180px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); font-size: 15px; line-height: 1.6; color: var(--color-text); background: var(--color-section); -webkit-font-smoothing: antialiased; }
+  .wrap { width: 100%; max-width: var(--max-width); margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 3rem); }
+  a { text-decoration: none; }
+
+  /* Pill nav */
+  .topbar { background: #fff; border-bottom: 1px solid var(--color-card-border); }
+  .topbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 0; flex-wrap: wrap; }
+  .brand { display: flex; align-items: center; gap: 0.6rem; font-family: var(--font-display); font-weight: 600; font-size: 1.2rem; color: var(--color-ink); }
+  .brand .mark { width: 24px; height: 24px; }
+  .pills { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .pill { font-family: var(--font-display); font-weight: 500; font-size: 0.85rem; padding: 0.45rem 1.05rem; border-radius: 999px; border: 1px solid var(--color-card-border); color: var(--color-teal); transition: background 0.2s ease; }
+  .pill:hover { background: var(--color-section); }
+  .pill.active { background: var(--color-teal-deep); color: #fff; border-color: var(--color-teal-deep); }
+
+  /* Hero */
+  .hero { background: var(--color-teal-deep); color: #fff; overflow: hidden; }
+  .hero-inner { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 2rem; align-items: center; padding: 3.5rem 0; }
+  .hero h1 { font-family: var(--font-display); font-weight: 600; font-size: clamp(2.6rem, 2rem + 3vw, 4.5rem); line-height: 1; margin-bottom: 1.2rem; }
+  .hero p { max-width: 34rem; font-size: 16px; line-height: 1.55; color: rgba(255,255,255,0.88); }
+  .hero-art { position: relative; min-height: 180px; }
+  .hero-art svg { position: absolute; right: -1rem; top: 50%; transform: translateY(-50%); width: 100%; height: auto; }
+
+  /* Body layout */
+  .layout { display: grid; grid-template-columns: 280px 1fr; gap: 2.5rem; padding: 3rem 0 4rem; align-items: start; }
+  .side { position: sticky; top: 1.5rem; background: #fff; border: 1px solid var(--color-card-border); border-radius: 14px; padding: 0.6rem; }
+  .side button { display: flex; width: 100%; justify-content: space-between; gap: 0.75rem; align-items: center; text-align: left; background: none; border: 0; cursor: pointer; font-family: var(--font-body); font-size: 0.92rem; color: var(--color-fine); padding: 0.7rem 0.8rem; border-radius: 10px; line-height: 1.35; transition: background 0.15s ease; }
+  .side button:hover { background: var(--color-section); }
+  .side button.active { background: var(--color-section); color: var(--color-teal); font-weight: 600; }
+  .side .count { flex: 0 0 auto; font-family: var(--font-display); font-weight: 600; font-size: 0.78rem; color: var(--color-teal); }
+
+  .main h2.section-title { font-family: var(--font-display); font-weight: 600; font-size: 2rem; color: var(--color-ink); margin-bottom: 0.2rem; }
+  .main .countline { color: var(--color-text); margin-bottom: 1.5rem; font-size: 0.95rem; }
+
+  .pat { background: #fff; border: 1px solid var(--color-card-border); border-radius: 14px; margin-bottom: 0.85rem; overflow: hidden; }
+  .pat-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; width: 100%; text-align: left; background: none; border: 0; cursor: pointer; padding: 1.3rem 1.5rem; font-family: var(--font-body); }
+  .pat-head h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.2rem; color: var(--color-teal); margin-bottom: 0.25rem; line-height: 1.2; }
+  .pat-head .sum { color: var(--color-text); font-size: 0.95rem; }
+  .chev { flex: 0 0 auto; width: 22px; height: 22px; color: var(--color-teal); transition: transform 0.25s ease; }
+  .pat.open .chev { transform: rotate(180deg); }
+  .pat-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+  .pat.open .pat-body { max-height: 600px; }
+  .pat-body-inner { padding: 0 1.5rem 1.5rem; border-top: 1px solid var(--color-section); }
+  .pat-body-inner p { margin: 1rem 0; }
+  .dodont { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin: 1rem 0; }
+  .dd { border-radius: 10px; padding: 0.85rem 1rem; font-size: 0.9rem; }
+  .dd.do { background: #e3f3ec; border: 1px solid #c3e3d4; }
+  .dd.dont { background: #fbe9ee; border: 1px solid #f3c6d3; }
+  .dd .t { font-family: var(--font-display); font-weight: 600; font-size: 0.72rem; letter-spacing: 0.6px; text-transform: uppercase; display: block; margin-bottom: 0.35rem; }
+  .dd.do .t { color: var(--color-teal); }
+  .dd.dont .t { color: #c23a63; }
+  .rel { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-display); font-weight: 500; font-size: 0.85rem; color: var(--color-teal-deep); background: var(--color-section); padding: 0.5rem 1rem; border-radius: 999px; margin-top: 0.4rem; }
+  .rel:hover { background: #e2efe9; }
+
+  footer { background: #fff; padding: 2.5rem 0; margin-top: 1rem; }
+  .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+  .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .footer-links a { color: var(--color-fine); font-size: 13px; }
+  .footer-links a:hover { color: var(--color-teal); }
+  .gwordmark { font-family: var(--font-display); font-weight: 600; color: var(--color-teal); letter-spacing: 0.3px; }
+
+  @media (max-width: 860px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-art { display: none; }
+    .layout { grid-template-columns: 1fr; }
+    .side { position: static; }
+    .dodont { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="index.html">
+        <svg class="mark" viewBox="0 0 24 24" fill="none"><path d="M4 14c2-1 4-1 6 0M6 18c2-1 4-1 6 0" stroke="#00695c" stroke-width="2" stroke-linecap="round"/><path d="M14 4c4 2 5 7 2 10-2-1-3-4-2-7" stroke="#7cc36a" stroke-width="2" stroke-linecap="round"/></svg>
+        Brewing + AI Guidebook
+      </a>
+      <nav class="pills">
+        <a class="pill active" href="patterns.html">Patterns</a>
+        <a class="pill" href="guidebook.html">Chapters</a>
+        <a class="pill" href="literacy.html">Prompts</a>
+        <a class="pill" href="index.html">Home</a>
+      </nav>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div>
+        <h1>Patterns</h1>
+        <p>Practical patterns for using AI well in a brewery. They are organised around the questions brewers actually ask, so you can jump to what you need.</p>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 360 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g stroke="#0c5a4e" stroke-width="1.5" opacity="0.9"><path d="M120 30 L330 14 M115 80 L330 64 M110 130 L330 114"/><path d="M160 24 L145 150 M230 18 L218 142 M300 14 L290 134"/></g>
+          <path d="M200 70 C250 50 320 80 305 135 C292 178 235 180 215 150 C198 124 165 92 200 70 Z" fill="#1f8a6f" opacity="0.85"/>
+          <circle cx="95" cy="70" r="28" fill="#2e9e7c" opacity="0.7"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap layout">
+
+    <!-- SIDEBAR FILTER -->
+    <aside class="side" id="side">
+      <button class="active" data-filter="all">All patterns <span class="count">23</span></button>
+      <button data-filter="g1">How do I get started with AI in my brewery? <span class="count">3</span></button>
+      <button data-filter="g2">How do I ask good brewing questions? <span class="count">4</span></button>
+      <button data-filter="g3">When do I trust an answer? <span class="count">5</span></button>
+      <button data-filter="g4">How do I keep the brewer in charge? <span class="count">4</span></button>
+      <button data-filter="g5">How do I handle my brewing data? <span class="count">4</span></button>
+      <button data-filter="g6">What do I do when AI is wrong? <span class="count">3</span></button>
+    </aside>
+
+    <!-- PATTERNS LIST -->
+    <main class="main">
+      <h2 class="section-title" id="title">All patterns</h2>
+      <p class="countline"><span id="visible-count">23</span> patterns</p>
+      <div id="list">
+
+        <!-- ===== g1: getting started ===== -->
+        <article class="pat" data-group="g1">
+          <button class="pat-head"><div><h3>Decide if AI actually adds value</h3><p class="sum">Reach for AI only when it helps you make better beer — sometimes a checklist is better.</p></div><svg class="chev" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <div class="pat-body"><div class="pat-body-inner">
+            <p>AI is not free and it is not always the right tool. A written SOP, a simple calculation, or a brewer's judgement often beats a model. Use AI when it genuinely saves time or surfaces something you would have missed.</p>
+            <div class="dodont"><div class="dd do"><span class="t">Do</span>Use it to draft tasting notes, talk through a stuck fermentation, or check textbook maths.</div><div class="dd dont"><span class="t">Don't</span>Add AI to a job a one-line SOP already handles perfectly.</div></div>
+            <a class="rel" href="chapter-1.html">Related chapter → Brewing Goals + Defining Quality</a>
+          </div></div>
+        </article>
+
+        <article class="pat" data-group="g1">
+          <button class="pat-head"><div><h3>Define quality before you ask</h3><p class="sum">Write what "good" means for the beer first, so you can judge any answer.</p></div><svg class="chev" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <div class="pat-body"><div class="pat-body-inner">
+            <p>A tool cannot help you hit a target you have not named. A short quality definition — numbers with ranges, must-have and must-not-have sensory notes, a pass/fail line — gives every answer something to be measured against.</p>
+            <div class="dodont"><div class="dd do"><span class="t">Do</span>Set FG 1.010–1.012, clean, no diacetyl as the target before asking for recipe help.</div><div class="dd dont"><span class="t">Don't</span>Ask it to "make my beer better" with no definition of better.</div></div>
+            <a class="rel" href="chapter-1.html">Related chapter → Brewing Goals + Defining Quality</a>
+          </div></div>
+        </article>
+
+        <article class="pat" data-group="g1">
+          <button class="pat-head"><div><h3>Start with one beer</h3><p class="sum">Prove it on a single flagship before rolling it across the brewery.</p></div><svg class="chev" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <div class="pat-body"><div class="pat-body-inner">
+            <p>A clean record of one beer over a dozen batches teaches you more than a messy archive of everything. Get the habit right on one flagship, prove it helps, then widen it.</p>
+            <div class="dodont"><div class="dd do"><span class="t">Do</span>Pick your highest-volume beer and build the workflow around it.</div><div class="dd dont"><span class="t">Don't</span>Try to digitise and analyse every recipe at once.</div></div>
+            <a class="rel" href="chapter-2.html">Related chapter → Brew Data + Record Keeping</a>
+          </div></div>
+        </article>
+
+        <!-- ===== g2: asking well ===== -->
+        <article class="pat" data-group="g2">
+          <button class="pat-head"><div><h3>Give brewing context every time</h3><p class="sum">Recipe, numbers, and kit turn a generic answer into a useful one.</p></div><svg class="chev" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <div class="pat-body"><div class="pat-body-inner">
+            <p>The tool has never seen your brewhouse. Without your grain bill, gravities, fermentation temps, and scale, it answers from generic knowledge. Context is the single biggest lever on answer quality.</p>
+            <div class="dodont"><div class="dd do"><span class="t">Do</span>Include style, OG/FG, yeast, temperature, and batch size in the question.</div><div class="dd dont"><span class="t">Don't</span>Assume it remembers your last beer — it does not.</div></div>
+            <a class="rel" href="chapter-3.html">Related chapter → Understanding the Tool</a>
+          </div></div>
+        </article>
+
+        <article class="pat" data-group="g2">
+          <button class="pat-head"><div><h3>Be specific, not vague</h3><p class="sum">"Why is my beer off?" gets a vague answer; details get a real one.</p></div><svg class="chev" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <div class="pat-body"><div class="pat-body-inner">
+            <p>The more precisely you describe the symptom and the conditions, the more the tool can narrow toward a real cause instead of listing every possibility.</p>
+            <div class="dodont"><div class="dd do"><span class="t">Do</span>"My pale ale has a buttery note, FG 1.014, fermented warm at 22°C — likely causes?"</div><div class="dd dont"><span class="t">Don't</span>"Why does my beer taste weird?"</div></div>
+            <a class="rel" href="literacy.html">Related → Ask better brewing questions</a>
+          </div></div>
+        </article>
+
+        <article class="pat" data-group="g2">
+          <button class="pat-head"><div><h3>Ask for the reasoning</h3><p class="sum">The working behind a number is easier to check than the number alone.</p></div><svg class="chev" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <div class="pat-body"><div class="pat-body-inner">
+            <p>Asking "walk me through how you got that" lets you spot a wrong assumption and often makes the tool catch its own mistake before you act on it.</p>
+            <div class="dodont"><div class="dd do"><span class="t">Do</span>Ask it to show the strike-water calculation step by step.</div><div class="dd dont"><span class="t">Don't</span>Take a bare figure and pour it into the mash.</div></div>
+            <a class="rel" href="chapter-4.html">Related chapter → Trust + Verification</a>
+          </div></div>
+        </article>
+
+        <article class="pat" data-group="g2">
+          <button class="pat-head"><div><h3>One question at a time</h3><p class="sum">Stacked questions get shallow answers; ask, judge, then ask again.</p></div><svg class="chev" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <div class="pat-body"><div class="pat-body-inner">
+            <p>A single focused question gets a focused answer you can actually verify. Bundling five concerns into one prompt produces a vague catch-all.</p>
+            <div class="dodont"><div class="dd do"><span class="t">Do</span>Solve the gravity question, confirm it, then move to hop timing.</div><div class="dd dont"><span class="t">Don't</span>Ask about water, yeast, hops, and packaging in one message.</div></div>
+            <a class="rel" href="chapter-3.html">Related chapter → Understanding the Tool</a>
+          </div></div>
+        </article>
+
+        <!-- ===== g3: trust ===== -->
+        <article class="pat" data-group="g3">
+          <button class="pat-head"><div><h3>Treat answers as hypotheses</h3><p class="sum">An answer is a well-informed guess to confirm, not an instrument reading.</p></div><svg class="chev" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <div class="pat-body"><div class="pat-body-inner">
+            <p>Useful hypotheses still need confirming. Build a verification step into your habit, especially when a batch is on the line.</p>
+            <div class="dodont"><div class="dd do"><span class="t">Do</span>Confirm a suggested change on a bench test before scaling.</div><div class="dd dont"><span class="t">Don't</span>Act on a single answer as if it were measured fact.</div></div>
+            <a class="rel" href="chapter-4.html">Related chapter → Trust + Verification</a>
+          </div></div>
+        </article>
+
+        <article class="pat" data-group="g3">
+          <button class="pat-head"><div><h3>Confident is not correct</h3><p class="sum">Fluent, assured wording tells you nothing about whether it is true.</p></div><svg class="chev" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <div class="pat-body"><div class="pat-body-inner">
+            <p>These tools sound equally sure whether they are right or guessing. You have to supply the doubt the tool will not.</p>
+            <div class="dodont"><div class="dd do"><span class="t">Do</span>Judge the answer on the reasoning and the numbers.</div><div class="dd dont"><span class="t">Don't</span>Trust it more because it sounded certain.</div></div>
+            <a class="rel" href="chapter-4.html">Related chapter → Trust + Verification</a>
+          </div></div>
+        </article>
+
+        <article class="pat" data-group="g3">
+          <button class="pat-head"><div><h3>Check the numbers against the brewhouse</h3><p class="sum">Your measurements outrank any model output.</p></div><svg class="chev" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <div class="pat-body"><div class="pat-body-inner">
+            <p>Hold any suggested figure up against your own gravities, efficiency, and what your yeast actually does. If they disagree, the brewhouse wins.</p>
+            <div class="dodont"><div class="dd do"><span class="t">Do</span>Compare a predicted FG to what that strain really attenuates for you.</div><div class="dd dont"><span class="t">Don't</span>Override a hundred batches of experience on the model's say-so.</div></div>
+            <a class="rel" href="chapter-4.html">Related chapter → Trust + Verification</a>
+          </div></div>
+        </article>
+
+        <article class="pat" data-group="g3">
+          <button class="pat-head"><div><h3>Distrust citations until verified</h3><p class="sum">References can look authoritative and not exist.</p></div><svg class="chev" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <div class="pat-body"><div class="pat-body-inner">
+            <p>Models sometimes invent studies, figures, and book titles. Treat any specific reference as unverified until you have seen the source yourself.</p>
+            <div class="dodont"><div class="dd do"><span class="t">Do</span>Look up the cited paper or standard before quoting it.</div><div class="dd dont"><span class="t">Don't</span>Repeat a confident-looking citation you have not checked.</div></div>
+            <a class="rel" href="chapter-4.html">Related chapter → Trust + Verification</a>
+          </div></div>
+        </article>
+
+        <article class="pat" data-group="g3">
+          <button class="pat-head"><div><h3>Test small before you scale</h3><p class="sum">A trial batch is a cheap way to confirm an idea before the flagship.</p></div><svg class="chev" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <div class="pat-body"><div class="pat-body-inner">
+            <p>A bench addition, a single tank, or a pilot batch confirms a suggestion at low cost before it touches a full production run.</p>
+            <div class="dodont"><div class="dd do"><span class="t">Do</span>Trial a new dry-hop timing on one tank first.</div><div class="dd dont"><span class="t">Don't</span>Roll an untested AI suggestion straight into every batch.</div></div>
+            <a class="rel" href="chapter-4.html">Related chapter → Trust + Verification</a>
+          </div></div>
+        </article>
+
+        <!-- ===== g4: control ===== -->
+        <article class="pat" data-group="g4">
+          <button class="pat-head"><div><h3>Keep a human in the loop at the tank</h3><p class="sum">The tool proposes; the brewer disposes.</p></div><svg class="chev" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <div class="pat-body"><div class="pat-body-inner">
+            <p>For anything that touches the tank, a brewer's final call is the safety mechanism. Never let a tool quietly make a brewing decision no human reviewed.</p>
+            <div class="dodont"><div class="dd do"><span class="t">Do</span>Have a brewer approve any change before it is acted on.</div><div class="dd dont"><span class="t">Don't</span>Wire a model directly to a process it can change unsupervised.</div></div>
+            <a class="rel" href="chapter-5.html">Related chapter → Feedback + The Brewer's Hand</a>
+          </div></div>
+        </article>
+
+        <article class="pat" data-group="g4">
+          <button class="pat-head"><div><h3>Define a clear sign-off point</h3><p class="sum">Decide in advance where the brewer must approve before acting.</p></div><svg class="chev" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <div class="pat-body"><div class="pat-body-inner">
+            <p>A simple rule works: anything affecting recipe, schedule, dilution, safety, or duty needs human review — no matter how confident the tool sounded. Low-stakes drafting can flow freely.</p>
+            <div class="dodont"><div class="dd do"><span class="t">Do</span>Write the rule down so the whole team applies it the same way.</div><div class="dd dont"><span class="t">Don't</span>Leave "when do we check this?" to be decided in the moment.</div></div>
+            <a class="rel" href="chapter-5.html">Related chapter → Feedback + The Brewer's Hand</a>
+          </div></div>
+        </article>
+
+        <article class="pat" data-group="g4">
+          <button class="pat-head"><div><h3>The first answer is a draft</h3><p class="sum">Correct, push back, and narrow it instead of taking it as final.</p></div><svg class="chev" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <div class="pat-body"><div class="pat-body-inner">
+            <p>The skill is in the correction. Add what it missed, push back on what does not fit your house style, and ask again with tighter constraints.</p>
+            <div class="dodont"><div class="dd do"><span class="t">Do</span>"You assumed 75% efficiency; mine runs 68% — redo it."</div><div class="dd dont"><span class="t">Don't</span>Accept a generic first reply and move on.</div></div>
+            <a class="rel" href="chapter-5.html">Related chapter → Feedback + The Brewer's Hand</a>
+          </div></div>
+        </article>
+
+        <article class="pat" data-group="g4">
+          <button class="pat-head"><div><h3>Brief it with your house facts</h3><p class="sum">Paste your real efficiencies and rules so it answers in your terms.</p></div><svg class="chev" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <div class="pat-body"><div class="pat-body-inner">
+            <p>Keep a short "house facts" note — mash efficiency, attenuation by strain, water profile, the rules you never break — and paste it into brewing conversations. You are not training the model; you are briefing it well, every time.</p>
+            <div class="dodont"><div class="dd do"><span class="t">Do</span>Lead with your house facts before asking the question.</div><div class="dd dont"><span class="t">Don't</span>Expect tailored answers from generic prompts.</div></div>
+            <a class="rel" href="chapter-5.html">Related chapter → Feedback + The Brewer's Hand</a>
+          </div></div>
+        </article>
+
+        <!-- ===== g5: data ===== -->
+        <article class="pat" data-group="g5">
+          <button class="pat-head"><div><h3>Treat your brew log as a dataset</h3><p class="sum">Its quality sets the ceiling on what any tool can do.</p></div><svg class="chev" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <div class="pat-body"><div class="pat-body-inner">
+            <p>Capture inputs, process, measurements, and honest outcomes for each batch. The outcome column — what the beer actually did — is the most valuable of all.</p>
+            <div class="dodont"><div class="dd do"><span class="t">Do</span>Log gravities, temps, sensory notes, and pass/fail every batch.</div><div class="dd dont"><span class="t">Don't</span>Keep records so patchy there is nothing to learn from.</div></div>
+            <a class="rel" href="chapter-2.html">Related chapter → Brew Data + Record Keeping</a>
+          </div></div>
+        </article>
+
+        <article class="pat" data-group="g5">
+          <button class="pat-head"><div><h3>One unit per field, always</h3><p class="sum">Mixed units quietly break every calculation downstream.</p></div><svg class="chev" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <div class="pat-body"><div class="pat-body-inner">
+            <p>Pick Plato or SG, Celsius or Fahrenheit, and never mix them in a column. A tool cannot tell that two batches were logged in different units.</p>
+            <div class="dodont"><div class="dd do"><span class="t">Do</span>Standardise units and ingredient names with a short pick-list.</div><div class="dd dont"><span class="t">Don't</span>Let "Maris", "Maris Otter", and "MO" live in the same field.</div></div>
+            <a class="rel" href="chapter-2.html">Related chapter → Brew Data + Record Keeping</a>
+          </div></div>
+        </article>
+
+        <article class="pat" data-group="g5">
+          <button class="pat-head"><div><h3>Record the failures too</h3><p class="sum">Stuck fermentations and dumped batches are your richest data.</p></div><svg class="chev" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <div class="pat-body"><div class="pat-body-inner">
+            <p>If you only keep good records when a batch goes well, the data tells the tool everything works. The misses are exactly what would teach it the most.</p>
+            <div class="dodont"><div class="dd do"><span class="t">Do</span>Log infections, stalls, and drain-pours with what went wrong.</div><div class="dd dont"><span class="t">Don't</span>Quietly delete the batches you would rather forget.</div></div>
+            <a class="rel" href="chapter-2.html">Related chapter → Brew Data + Record Keeping</a>
+          </div></div>
+        </article>
+
+        <article class="pat" data-group="g5">
+          <button class="pat-head"><div><h3>Start small and keep it clean</h3><p class="sum">A dozen tidy batches beats a sprawling, contradictory archive.</p></div><svg class="chev" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <div class="pat-body"><div class="pat-body-inner">
+            <p>Consistency beats volume. Get the recording habit right on one beer, then widen it once it is clean and complete.</p>
+            <div class="dodont"><div class="dd do"><span class="t">Do</span>Run a quick check for gaps and impossible values regularly.</div><div class="dd dont"><span class="t">Don't</span>Trust an answer built on records you have never audited.</div></div>
+            <a class="rel" href="chapter-2.html">Related chapter → Brew Data + Record Keeping</a>
+          </div></div>
+        </article>
+
+        <!-- ===== g6: mistakes ===== -->
+        <article class="pat" data-group="g6">
+          <button class="pat-head"><div><h3>Run the red-flag checklist</h3><p class="sum">Known warning signs catch a wrong answer before it acts.</p></div><svg class="chev" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <div class="pat-body"><div class="pat-body-inner">
+            <p>Watch for a precise number with no working, a confident claim about something recent or local, a citation you cannot find, advice that ignores your scale, or units that do not match your records.</p>
+            <div class="dodont"><div class="dd do"><span class="t">Do</span>Pause and verify the moment a red flag appears.</div><div class="dd dont"><span class="t">Don't</span>Wave a flagged answer through because the rest looked good.</div></div>
+            <a class="rel" href="chapter-6.html">Related chapter → Mistakes + Red Flags</a>
+          </div></div>
+        </article>
+
+        <article class="pat" data-group="g6">
+          <button class="pat-head"><div><h3>Diagnose: the tool or the question?</h3><p class="sum">Most wrong answers are a thin question, not a broken tool.</p></div><svg class="chev" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <div class="pat-body"><div class="pat-body-inner">
+            <p>If the prompt was vague, the fix is yours: add context and ask again. If the question is specific to your kit or very recent events, the tool simply cannot know — fall back to measurement.</p>
+            <div class="dodont"><div class="dd do"><span class="t">Do</span>Add your numbers and re-ask before blaming the tool.</div><div class="dd dont"><span class="t">Don't</span>Expect prompting to fix a question the model can't answer.</div></div>
+            <a class="rel" href="chapter-6.html">Related chapter → Mistakes + Red Flags</a>
+          </div></div>
+        </article>
+
+        <article class="pat" data-group="g6">
+          <button class="pat-head"><div><h3>Fall back to measurement</h3><p class="sum">When the tool is out of its depth, the beer is the final authority.</p></div><svg class="chev" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <div class="pat-body"><div class="pat-body-inner">
+            <p>A wrong answer that never reaches the tank costs nothing. When a model is out of its depth, trust your gauges, your palate, and a trial batch over its confident text.</p>
+            <div class="dodont"><div class="dd do"><span class="t">Do</span>Measure, taste, and test when the tool is uncertain or wrong.</div><div class="dd dont"><span class="t">Don't</span>Let an unverified answer make the final call on a batch.</div></div>
+            <a class="rel" href="chapter-6.html">Related chapter → Mistakes + Red Flags</a>
+          </div></div>
+        </article>
+
+      </div>
+    </main>
+  </div>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <div class="gwordmark">Brewing Distilling + AI</div>
+      <div class="footer-links">
+        <a href="guidebook.html">All chapters</a>
+        <a href="index.html">Home</a>
+        <a href="https://github.com/AnkurNapa/brewing-distilling-ai">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Accordion
+    document.querySelectorAll('.pat-head').forEach(function (h) {
+      h.addEventListener('click', function () {
+        h.closest('.pat').classList.toggle('open');
+      });
+    });
+
+    // Filter by question group
+    var titles = {
+      all: 'All patterns',
+      g1: 'How do I get started with AI in my brewery?',
+      g2: 'How do I ask good brewing questions?',
+      g3: 'When do I trust an answer?',
+      g4: 'How do I keep the brewer in charge?',
+      g5: 'How do I handle my brewing data?',
+      g6: 'What do I do when AI is wrong?'
+    };
+    var buttons = document.querySelectorAll('#side button');
+    var pats = document.querySelectorAll('.pat');
+    buttons.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var f = b.getAttribute('data-filter');
+        buttons.forEach(function (x) { x.classList.remove('active'); });
+        b.classList.add('active');
+        var shown = 0;
+        pats.forEach(function (p) {
+          var match = (f === 'all' || p.getAttribute('data-group') === f);
+          p.style.display = match ? '' : 'none';
+          p.classList.remove('open');
+          if (match) shown++;
+        });
+        document.getElementById('title').textContent = titles[f];
+        document.getElementById('visible-count').textContent = shown;
+      });
+    });
+  </script>
+
+</body>
+</html>
