@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Literacy for Brewers — Brewing Distilling + AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    /* PAIR palette */
+    --color-teal: #00695c;
+    --color-pink: #ff4081;
+    --color-pink-hero: #fd4376;
+    --color-ink: rgba(0, 0, 0, 0.87);
+    --color-text: #4a4a4a;
+    --color-fine: #3c4043;
+    --color-bg: #ffffff;
+    --color-section: #f0f6f5;
+
+    --font-display: "Poppins", "Google Sans", Roboto, sans-serif;
+    --font-body: "Open Sans", Helvetica, sans-serif;
+
+    --max-width: 1280px;
+    --space-section: clamp(3.5rem, 2rem + 6vw, 7rem);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    font-size: 14px; line-height: 20px;
+    color: var(--color-text);
+    background: var(--color-bg);
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { width: 100%; max-width: var(--max-width); margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 3rem); }
+  a { text-decoration: none; }
+
+  /* Header */
+  header { padding: 1.75rem 0 1rem; }
+  .header-inner { display: flex; align-items: flex-start; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+  .logo {
+    font-family: var(--font-display); font-weight: 600;
+    font-size: 1.65rem; line-height: 1.05; color: var(--color-ink); letter-spacing: -0.5px;
+  }
+  .logo .plus, .logo .ai { color: var(--color-teal); }
+  nav ul { list-style: none; display: flex; align-items: center; gap: 1.6rem; flex-wrap: wrap; padding-top: 0.4rem; }
+  nav a {
+    font-size: 14px; font-weight: 500; letter-spacing: 0.1px; text-transform: uppercase;
+    color: var(--color-pink); transition: opacity 0.2s ease;
+  }
+  nav a:hover { opacity: 0.6; }
+  .m-tile {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 26px; height: 26px; background: #303030; color: #fff;
+    font-family: var(--font-display); font-weight: 600; border-radius: 2px; font-size: 15px;
+  }
+
+  /* Hero */
+  .hero { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; padding: 2.5rem 0 4rem; }
+  .eyebrow { font-family: var(--font-display); font-weight: 600; font-size: 0.78rem; letter-spacing: 1.2px; text-transform: uppercase; color: var(--color-pink); margin-bottom: 1rem; }
+  .hero h1 {
+    font-family: var(--font-display); font-weight: 400;
+    font-size: clamp(2.4rem, 1.5rem + 3vw, 3rem); line-height: 1.05; color: var(--color-ink); margin-bottom: 1.75rem;
+  }
+  .hero h1 .rotator {
+    color: var(--color-pink-hero); font-weight: 600; display: inline-block;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+  .hero h1 .rotator.swap { opacity: 0; transform: translateY(6px); }
+  .hero p { max-width: 30rem; margin-bottom: 1.1rem; color: var(--color-text); font-size: 15px; line-height: 1.55; }
+
+  .divider { display: block; width: 100%; margin-top: -2px; line-height: 0; }
+  .divider svg { display: block; width: 100%; height: auto; }
+
+  /* Work section */
+  .work { background: var(--color-section); padding: var(--space-section) 0 calc(var(--space-section) + 1rem); }
+  .work h2 {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: clamp(2.2rem, 1.4rem + 2.6vw, 3rem); line-height: 1.0; letter-spacing: 0.1px;
+    color: var(--color-teal); margin-bottom: 0.75rem;
+  }
+  .work .lede { max-width: 38rem; margin-bottom: 2.75rem; font-size: 15px; line-height: 1.55; color: var(--color-text); }
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3.5rem 3rem; }
+  .card-thumb { width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 0; box-shadow: none; overflow: hidden; display: block; }
+  .card-thumb svg { width: 100%; height: 100%; display: block; }
+  .step { font-family: var(--font-display); font-weight: 600; font-size: 0.8rem; letter-spacing: 0.5px; color: var(--color-pink); margin: 1.1rem 0 0.2rem; }
+  .card h3 {
+    font-family: var(--font-display); font-weight: 400; font-size: 1.7rem; line-height: 1.2;
+    letter-spacing: 0.1px; color: var(--color-teal); margin: 0 0 0.65rem;
+  }
+  .card p { color: var(--color-text); font-size: 14px; line-height: 1.5; margin-bottom: 0.85rem; max-width: 30rem; }
+  .cta { font-weight: 500; letter-spacing: 0.1px; color: var(--color-pink); display: inline-flex; align-items: center; gap: 0.35rem; transition: gap 0.2s ease; }
+  .cta::after { content: "→"; transition: transform 0.2s ease; }
+  .cta:hover::after { transform: translateX(3px); }
+
+  /* Closing message band */
+  .message { padding: var(--space-section) 0; }
+  .message blockquote {
+    font-family: var(--font-display); font-weight: 400;
+    font-size: clamp(1.5rem, 1rem + 1.8vw, 2.1rem); line-height: 1.35;
+    color: var(--color-ink); max-width: 46rem; border: 0; padding: 0;
+  }
+  .message blockquote .hl { color: var(--color-teal); font-weight: 600; }
+  .message cite { display: block; margin-top: 1.5rem; font-style: normal; font-size: 14px; color: var(--color-fine); }
+
+  /* Footer */
+  footer { padding: 3rem 0; text-align: center; background: var(--color-section); }
+  .footer-links { display: flex; gap: 2rem; justify-content: center; margin-bottom: 1.5rem; }
+  .footer-links a { color: var(--color-fine); font-size: 13px; }
+  .footer-links a:hover { color: var(--color-teal); }
+  .gwordmark { font-family: var(--font-display); font-weight: 500; color: #9aa0a6; letter-spacing: 0.5px; }
+
+  @media (max-width: 820px) {
+    .hero { grid-template-columns: 1fr; padding-bottom: 2rem; }
+    .hero-art { order: -1; max-width: 360px; }
+    .grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .header-inner { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="wrap header-inner">
+      <div class="logo">Brewing&nbsp;Distilling<br /><span class="plus">+</span>&nbsp;<span class="ai">AI</span></div>
+      <nav>
+        <ul>
+          <li><a href="#why">Why now</a></li>
+          <li><a href="#prompts">Prompts</a></li>
+          <li><a href="#evaluate">Evaluate</a></li>
+          <li><a href="#risks">Risks</a></li>
+          <li><a href="#checklist">Checklist</a></li>
+          <li><a href="index.html">Home</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="wrap hero">
+    <div class="hero-copy">
+      <div class="eyebrow">AI literacy for brewers</div>
+      <h1>Use AI and stay <span class="rotator" id="rotator">Curious</span></h1>
+      <p>A practical framework for brewers learning to use AI tools thoughtfully — without either fearing them or overtrusting them.</p>
+      <p>The goal is not a tour of every possible AI application in brewing. It is one useful skill: learning to ask better questions, give the right brewing context, and judge whether an answer is actually reliable.</p>
+    </div>
+    <div class="hero-art">
+      <!-- still + grain + brain/question illustration, PAIR palette -->
+      <svg viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g stroke="#1f2937" stroke-width="1.2" opacity="0.85">
+          <path d="M255 40 L360 30 M255 70 L360 60 M255 100 L360 90 M255 130 L360 120" />
+          <path d="M265 30 L256 140 M295 28 L288 138 M325 26 L320 134 M355 24 L350 130" />
+        </g>
+        <path d="M150 60 C120 40 90 80 110 120 C130 160 90 180 130 210 C170 240 140 280 190 270 C230 262 220 220 250 200 C290 174 270 120 230 110 C200 102 190 84 150 60 Z" fill="#7cc36a" opacity="0.55"/>
+        <path d="M210 90 C240 70 290 90 285 130 C280 170 320 180 300 220 C285 250 250 250 235 225 C222 204 200 200 200 170 C200 140 185 108 210 90 Z" fill="#00695c" opacity="0.5"/>
+        <!-- speech bubble with question mark = asking AI -->
+        <g transform="translate(300 120)">
+          <rect x="-2" y="-18" width="64" height="46" rx="10" fill="#fd4376"/>
+          <path d="M10 28 L18 40 L26 28 Z" fill="#fd4376"/>
+          <text x="30" y="14" font-family="Poppins, sans-serif" font-weight="600" font-size="28" fill="#fff" text-anchor="middle">?</text>
+        </g>
+        <g fill="#fd4376" opacity="0.7">
+          <circle cx="120" cy="150" r="4"/><circle cx="135" cy="130" r="3"/><circle cx="150" cy="160" r="5"/><circle cx="165" cy="135" r="3"/>
+        </g>
+        <!-- pot still -->
+        <g>
+          <ellipse cx="155" cy="300" rx="42" ry="8" fill="#fd4376" opacity="0.85"/>
+          <path d="M120 240 C120 200 190 200 190 240 L182 280 L128 280 Z" fill="#1f2937"/>
+          <path d="M120 240 C120 200 190 200 190 240 L186 252 L124 252 Z" fill="#374151"/>
+          <path d="M155 200 L155 165 C155 150 215 150 210 178" stroke="#00695c" stroke-width="9" fill="none" stroke-linecap="round"/>
+          <rect x="148" y="278" width="14" height="14" fill="#111827"/>
+        </g>
+        <!-- grain stalk -->
+        <g stroke="#00695c" stroke-width="3" fill="#7cc36a">
+          <path d="M70 300 L70 210" stroke-linecap="round"/>
+          <ellipse cx="62" cy="220" rx="5" ry="10" transform="rotate(-25 62 220)"/>
+          <ellipse cx="78" cy="225" rx="5" ry="10" transform="rotate(25 78 225)"/>
+          <ellipse cx="62" cy="240" rx="5" ry="10" transform="rotate(-25 62 240)"/>
+          <ellipse cx="78" cy="245" rx="5" ry="10" transform="rotate(25 78 245)"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- TORN DIVIDER -->
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 40 C160 10 280 55 440 38 C600 22 720 58 900 40 C1080 22 1220 56 1440 30 L1440 60 L0 60 Z" fill="#f0f6f5"/>
+    </svg>
+  </div>
+
+  <!-- WORK -->
+  <section class="work" id="why">
+    <div class="wrap">
+      <h2>What the framework covers</h2>
+      <p class="lede">Seven plain questions, in the order a brewer actually meets them — from "why is everyone talking about this" to a checklist you can keep by the kettle.</p>
+      <div class="grid">
+
+        <article class="card">
+          <div class="card-thumb">
+            <svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+              <rect width="320" height="180" fill="#0c5045"/>
+              <path d="M0 30 H320 M0 60 H320 M0 90 H320 M0 120 H320 M0 150 H320" stroke="#1c6b5d" stroke-width="1"/>
+              <path d="M40 140 q30 -60 70 -30 t90 -20 80 30" stroke="#7cc36a" stroke-width="3" fill="none"/>
+              <circle cx="90" cy="70" r="22" fill="#3aa14a" opacity="0.7"/>
+              <circle cx="220" cy="110" r="30" fill="#7cc36a" opacity="0.6"/>
+            </svg>
+          </div>
+          <div class="step">01</div>
+          <h3>Why brewers are interested now</h3>
+          <p>Curiosity is high and the tools are everywhere. A grounded look at what is driving the interest, and why "where do I even start" is the right first question.</p>
+          <a class="cta" href="#">Read section</a>
+        </article>
+
+        <article class="card">
+          <div class="card-thumb">
+            <svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+              <rect width="320" height="180" fill="#dff0e6"/>
+              <!-- hand + grain: experience -->
+              <path d="M30 160 H300" stroke="#9bb3a6" stroke-width="1"/>
+              <g stroke="#00695c" stroke-width="4" fill="#7cc36a">
+                <path d="M160 160 L160 70" stroke-linecap="round"/>
+                <ellipse cx="146" cy="86" rx="7" ry="14" transform="rotate(-25 146 86)"/>
+                <ellipse cx="174" cy="92" rx="7" ry="14" transform="rotate(25 174 92)"/>
+                <ellipse cx="146" cy="112" rx="7" ry="14" transform="rotate(-25 146 112)"/>
+                <ellipse cx="174" cy="118" rx="7" ry="14" transform="rotate(25 174 118)"/>
+              </g>
+              <circle cx="100" cy="60" r="6" fill="#fd4376"/>
+              <circle cx="232" cy="70" r="6" fill="#fd4376"/>
+            </svg>
+          </div>
+          <div class="step">02</div>
+          <h3>Why brewing knowledge still matters</h3>
+          <p>AI is a tool that supports brewing expertise. It does not replace it, and it is not here to take your job. Your experience is what makes any answer actually useful.</p>
+          <a class="cta" href="#">Read section</a>
+        </article>
+
+        <article class="card" id="prompts">
+          <div class="card-thumb">
+            <svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+              <rect width="320" height="180" fill="#fff"/>
+              <!-- vague vs better question bubbles -->
+              <g>
+                <rect x="16" y="26" width="180" height="46" rx="12" fill="#fbe2e9"/>
+                <text x="30" y="46" font-family="Open Sans, sans-serif" font-size="12" fill="#a83b59">Vague:</text>
+                <text x="30" y="63" font-family="Open Sans, sans-serif" font-size="12" fill="#a83b59">"Why is my beer off?"</text>
+              </g>
+              <g>
+                <rect x="60" y="100" width="244" height="58" rx="12" fill="#d6efe2"/>
+                <text x="76" y="120" font-family="Open Sans, sans-serif" font-size="12" fill="#00695c">Better: "My pale ale has</text>
+                <text x="76" y="136" font-family="Open Sans, sans-serif" font-size="12" fill="#00695c">a buttery note, FG 1.014,</text>
+                <text x="76" y="152" font-family="Open Sans, sans-serif" font-size="12" fill="#00695c">fermented warm at 22C..."</text>
+              </g>
+            </svg>
+          </div>
+          <div class="step">03</div>
+          <h3>What makes a good brewing prompt</h3>
+          <p>A vague question gets a vague answer. Learn the context that turns a prompt into a useful one: ingredients, process, numbers, and what "good" looks like for you.</p>
+          <a class="cta" href="#">See vague vs. specific</a>
+        </article>
+
+        <article class="card" id="evaluate">
+          <div class="card-thumb">
+            <svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+              <rect width="320" height="180" fill="#0f1d3a"/>
+              <!-- magnifying glass over answer -->
+              <g stroke="#4dd0c4" stroke-width="3" fill="none">
+                <circle cx="150" cy="80" r="34"/>
+                <path d="M176 106 L210 140" stroke-linecap="round"/>
+              </g>
+              <g stroke="#4dd0c4" stroke-width="2" opacity="0.7">
+                <path d="M134 74 H166 M134 84 H162 M134 94 H158"/>
+              </g>
+              <circle cx="244" cy="48" r="4" fill="#fd4376"/>
+              <circle cx="262" cy="120" r="4" fill="#fd4376"/>
+            </svg>
+          </div>
+          <div class="step">04</div>
+          <h3>How to evaluate the answer</h3>
+          <p>How to tell whether an answer is reliable or just confident-sounding. Cross-check it against your own knowledge, trusted sources, and what the numbers should be.</p>
+          <a class="cta" href="#">Read section</a>
+        </article>
+
+        <article class="card" id="risks">
+          <div class="card-thumb">
+            <svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+              <rect width="320" height="180" fill="#fbe2e9"/>
+              <!-- red flag -->
+              <g>
+                <path d="M120 40 L120 150" stroke="#a83b59" stroke-width="5" stroke-linecap="round"/>
+                <path d="M120 44 L210 44 L192 66 L210 88 L120 88 Z" fill="#fd4376"/>
+              </g>
+              <g stroke="#fd4376" stroke-width="2" opacity="0.6">
+                <path d="M230 60 l16 0 M230 90 l30 0 M230 120 l22 0"/>
+              </g>
+            </svg>
+          </div>
+          <div class="step">05</div>
+          <h3>Risks, limits and red flags</h3>
+          <p>Where AI gets brewing wrong, what it confidently makes up, and the warning signs that tell you to stop and verify before acting on an answer.</p>
+          <a class="cta" href="#">Read section</a>
+        </article>
+
+        <article class="card" id="checklist">
+          <div class="card-thumb">
+            <svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="tealGlow" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#4dd0c4"/>
+                  <stop offset="1" stop-color="#0f8a7e"/>
+                </linearGradient>
+              </defs>
+              <rect width="320" height="180" fill="url(#tealGlow)"/>
+              <g stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+                <path d="M70 56 l10 10 l18 -20"/>
+                <path d="M70 96 l10 10 l18 -20"/>
+                <path d="M70 136 l10 10 l18 -20"/>
+              </g>
+              <g stroke="#eafffb" stroke-width="3" opacity="0.85">
+                <path d="M120 56 h130 M120 96 h130 M120 136 h100"/>
+              </g>
+            </svg>
+          </div>
+          <div class="step">06</div>
+          <h3>A starter checklist</h3>
+          <p>A short, practical checklist for brewers trying AI for the first time — so the first session builds good habits instead of bad ones.</p>
+          <a class="cta" href="#">Get the checklist</a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING MESSAGE -->
+  <section class="message">
+    <div class="wrap">
+      <blockquote>
+        AI is not here to replace experienced brewers. But brewers will need to learn to use it <span class="hl">responsibly and critically</span> — and the people who understand both brewing and how to work with these tools will be in the best position to benefit.
+      </blockquote>
+      <cite>The throughline of the framework</cite>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap">
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="#">The book idea</a>
+      </div>
+      <div class="gwordmark">Written for the MBAA membership</div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var words = ["Curious", "Critical", "Skeptical", "Informed", "In Control"];
+      var el = document.getElementById("rotator");
+      var i = 0;
+      setInterval(function () {
+        el.classList.add("swap");
+        setTimeout(function () {
+          i = (i + 1) % words.length;
+          el.textContent = words[i];
+          el.classList.remove("swap");
+        }, 350);
+      }, 2200);
+    })();
+  </script>
+
+</body>
+</html>
