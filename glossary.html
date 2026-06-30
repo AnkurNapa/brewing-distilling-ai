@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Brewing + AI Guidebook — Glossary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --color-teal: #00695c;
+    --color-teal-deep: #06483f;
+    --color-pink: #ff4081;
+    --color-ink: rgba(0, 0, 0, 0.87);
+    --color-text: #4a4a4a;
+    --color-fine: #3c4043;
+    --color-section: #f0f6f5;
+    --color-card-border: #d8e6e1;
+    --font-display: "Poppins", "Google Sans", Roboto, sans-serif;
+    --font-body: "Open Sans", Helvetica, sans-serif;
+    --max-width: 1180px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); font-size: 16px; line-height: 1.6; color: var(--color-text); background: #fff; -webkit-font-smoothing: antialiased; }
+  .wrap { width: 100%; max-width: var(--max-width); margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 3rem); }
+  a { text-decoration: none; }
+
+  /* Pill nav */
+  .topbar { background: #fff; border-bottom: 1px solid var(--color-card-border); }
+  .topbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; padding: 1rem 0; flex-wrap: wrap; }
+  .brand { display: flex; align-items: center; gap: 0.6rem; font-family: var(--font-display); font-weight: 600; font-size: 1.2rem; color: var(--color-ink); }
+  .brand .mark { width: 24px; height: 24px; }
+  .pills { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .pill { font-family: var(--font-display); font-weight: 500; font-size: 0.85rem; padding: 0.45rem 1.05rem; border-radius: 999px; border: 1px solid var(--color-card-border); color: var(--color-teal); transition: background 0.2s ease; }
+  .pill:hover { background: var(--color-section); }
+  .pill.active { background: var(--color-teal-deep); color: #fff; border-color: var(--color-teal-deep); }
+
+  /* Header */
+  .ghead { padding: 3rem 0 1.5rem; }
+  .ghead h1 { font-family: var(--font-display); font-weight: 600; font-size: clamp(2.6rem, 2rem + 3vw, 4rem); line-height: 1; color: var(--color-ink); margin-bottom: 0.8rem; }
+  .ghead p { max-width: 40rem; color: var(--color-text); }
+
+  /* Search */
+  .search { margin-top: 1.5rem; max-width: 30rem; position: relative; }
+  .search input { width: 100%; font-family: var(--font-body); font-size: 1rem; padding: 0.8rem 1rem 0.8rem 2.6rem; border: 1px solid var(--color-card-border); border-radius: 999px; color: var(--color-ink); outline: none; transition: border-color 0.2s ease; }
+  .search input:focus { border-color: var(--color-teal); }
+  .search svg { position: absolute; left: 0.95rem; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; color: var(--color-teal); }
+
+  /* Layout */
+  .layout { display: grid; grid-template-columns: 120px 1fr; gap: 2.5rem; padding: 1rem 0 4rem; align-items: start; }
+  .az { position: sticky; top: 1.5rem; display: flex; flex-direction: column; gap: 0.15rem; }
+  .az a { font-family: var(--font-display); font-weight: 600; font-size: 0.95rem; color: var(--color-teal); padding: 0.25rem 0.55rem; border-radius: 8px; width: max-content; transition: background 0.15s ease; }
+  .az a:hover { background: var(--color-section); }
+  .az a.disabled { color: #c2cdc9; pointer-events: none; }
+
+  .terms { min-width: 0; }
+  .letter-group { margin-bottom: 2.2rem; }
+  .letter { font-family: var(--font-display); font-weight: 700; font-size: 1.5rem; color: var(--color-teal); border-bottom: 2px solid var(--color-section); padding-bottom: 0.4rem; margin-bottom: 1.2rem; }
+  .term { margin-bottom: 1.6rem; }
+  .term h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.3rem; color: var(--color-ink); margin-bottom: 0.3rem; display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+  .chip { font-family: var(--font-display); font-weight: 600; font-size: 0.62rem; letter-spacing: 0.6px; text-transform: uppercase; padding: 0.2rem 0.55rem; border-radius: 999px; }
+  .chip.ai { background: #e0f2ec; color: var(--color-teal); }
+  .chip.brew { background: #ffe6ef; color: #c23a63; }
+  .chip.guide { background: #fff1cc; color: #8a6a12; }
+  .term p { color: var(--color-text); max-width: 46rem; }
+  .term p a { color: var(--color-pink); font-weight: 600; }
+  .noresult { display: none; color: var(--color-text); font-style: italic; padding: 1rem 0; }
+
+  footer { background: var(--color-section); padding: 2.5rem 0; margin-top: 1rem; }
+  .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+  .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .footer-links a { color: var(--color-fine); font-size: 13px; }
+  .footer-links a:hover { color: var(--color-teal); }
+  .gwordmark { font-family: var(--font-display); font-weight: 600; color: var(--color-teal); letter-spacing: 0.3px; }
+
+  @media (max-width: 760px) {
+    .layout { grid-template-columns: 1fr; gap: 1rem; }
+    .az { position: static; flex-direction: row; flex-wrap: wrap; gap: 0.1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--color-section); margin-bottom: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="index.html">
+        <svg class="mark" viewBox="0 0 24 24" fill="none"><path d="M4 14c2-1 4-1 6 0M6 18c2-1 4-1 6 0" stroke="#00695c" stroke-width="2" stroke-linecap="round"/><path d="M14 4c4 2 5 7 2 10-2-1-3-4-2-7" stroke="#7cc36a" stroke-width="2" stroke-linecap="round"/></svg>
+        Brewing + AI Guidebook
+      </a>
+      <nav class="pills">
+        <a class="pill" href="patterns.html">Patterns</a>
+        <a class="pill" href="guidebook.html">Chapters</a>
+        <a class="pill" href="literacy.html">Prompts</a>
+        <a class="pill active" href="glossary.html">Glossary</a>
+        <a class="pill" href="index.html">Home</a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="wrap ghead">
+    <h1>Glossary</h1>
+    <p>Plain-language definitions of the AI and brewing terms used across this guidebook. Each term is tagged so you can see at a glance whether it comes from the world of <span class="chip ai">AI</span> <span class="chip brew">Brewing</span> or this <span class="chip guide">Guide</span>.</p>
+    <div class="search">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <input type="text" id="q" placeholder="Search terms…" aria-label="Search glossary terms" />
+    </div>
+  </div>
+
+  <div class="wrap layout">
+
+    <!-- A-Z index -->
+    <aside class="az" id="az"></aside>
+
+    <!-- Terms -->
+    <main class="terms" id="terms">
+
+      <div class="letter-group" data-letter="A">
+        <h2 class="letter">A</h2>
+        <div class="term"><h3>Attenuation <span class="chip brew">Brewing</span></h3><p>How much of the sugar in your wort the yeast converts to alcohol and CO₂. A common thing to predict, and a good test of whether an AI estimate matches what your strain really does.</p></div>
+        <div class="term"><h3>AI (Artificial Intelligence) <span class="chip ai">AI</span></h3><p>Software that performs tasks usually needing human judgement, such as answering questions or spotting patterns. In this guide it usually means a chat-style assistant.</p></div>
+      </div>
+
+      <div class="letter-group" data-letter="B">
+        <h2 class="letter">B</h2>
+        <div class="term"><h3>Bias (in data) <span class="chip ai">AI</span></h3><p>When your records lean one way and quietly mislead the tool — for example, if you only kept good notes when a batch went well, the data tells the model everything works.</p></div>
+      </div>
+
+      <div class="letter-group" data-letter="C">
+        <h2 class="letter">C</h2>
+        <div class="term"><h3>Confidence <span class="chip ai">AI</span></h3><p>How sure an answer sounds or claims to be. Crucially, confidence is <strong>not</strong> the same as being correct — a model sounds equally certain whether it is right or guessing.</p></div>
+        <div class="term"><h3>Context <span class="chip guide">Guide</span></h3><p>The brewing details you give the tool with a question — recipe, gravities, temperatures, kit, scale. More context turns a generic answer into a useful one.</p></div>
+      </div>
+
+      <div class="letter-group" data-letter="D">
+        <h2 class="letter">D</h2>
+        <div class="term"><h3>Dataset <span class="chip ai">AI</span></h3><p>Your brewing records treated as data a tool can learn from or analyse. Its quality sets the ceiling on what any tool can do for you.</p></div>
+        <div class="term"><h3>Diacetyl <span class="chip brew">Brewing</span></h3><p>A buttery or butterscotch off-flavor, often from rushed fermentation. Used throughout the guide as an example of something to catch early.</p></div>
+        <div class="term"><h3>DMS <span class="chip brew">Brewing</span></h3><p>Dimethyl sulfide — a cooked-corn or cabbage off-flavor. One of the off-flavors a quality definition typically marks as an automatic fail.</p></div>
+      </div>
+
+      <div class="letter-group" data-letter="F">
+        <h2 class="letter">F</h2>
+        <div class="term"><h3>FG (Final Gravity) <span class="chip brew">Brewing</span></h3><p>The gravity of the beer after fermentation finishes. Together with OG it gives you ABV, and it is one of the most common numbers an AI tool is asked to estimate.</p></div>
+      </div>
+
+      <div class="letter-group" data-letter="G">
+        <h2 class="letter">G</h2>
+        <div class="term"><h3>Generative AI <span class="chip ai">AI</span></h3><p>AI that produces new text (or images) in response to a prompt, rather than just classifying things. The chat assistants this guide is about are generative AI.</p></div>
+      </div>
+
+      <div class="letter-group" data-letter="H">
+        <h2 class="letter">H</h2>
+        <div class="term"><h3>Hallucination <span class="chip ai">AI</span></h3><p>When an AI confidently states something false — an invented figure, a made-up citation, a wrong rest temperature. A core reason to verify before acting.</p></div>
+        <div class="term"><h3>House facts <span class="chip guide">Guide</span></h3><p>A short note of your brewery's real numbers and rules — mash efficiency, attenuation by strain, water profile — that you paste in to brief the tool so it answers in your terms.</p></div>
+      </div>
+
+      <div class="letter-group" data-letter="L">
+        <h2 class="letter">L</h2>
+        <div class="term"><h3>Large Language Model (LLM) <span class="chip ai">AI</span></h3><p>The kind of AI behind chat assistants. The guide's mental model for it is a "very well-read apprentice" who has read widely but never tasted your beer.</p></div>
+      </div>
+
+      <div class="letter-group" data-letter="M">
+        <h2 class="letter">M</h2>
+        <div class="term"><h3>Machine learning <span class="chip ai">AI</span></h3><p>Software that learns patterns from examples rather than being told every rule — like a brewer learning a yeast strain after a hundred batches, but faster.</p></div>
+        <div class="term"><h3>Mental model <span class="chip guide">Guide</span></h3><p>Your working picture of what the tool is and is not. A clear one ("knowledgeable apprentice, not an authority") prevents both fear and over-trust.</p></div>
+        <div class="term"><h3>Model <span class="chip ai">AI</span></h3><p>The trained AI tool itself. In this guide, the apprentice: fast and widely read, but with no taste, no memory of your brews, and no hands on your kit.</p></div>
+      </div>
+
+      <div class="letter-group" data-letter="O">
+        <h2 class="letter">O</h2>
+        <div class="term"><h3>Off-flavor <span class="chip brew">Brewing</span></h3><p>An unwanted flavor or aroma such as diacetyl, DMS, acetaldehyde, or oxidation. Catching these early is a key promised use of AI in the guide.</p></div>
+        <div class="term"><h3>OG (Original Gravity) <span class="chip brew">Brewing</span></h3><p>The gravity of the wort before fermentation, a measure of fermentable sugar. The starting point for predicting ABV and attenuation.</p></div>
+      </div>
+
+      <div class="letter-group" data-letter="P">
+        <h2 class="letter">P</h2>
+        <div class="term"><h3>Pattern <span class="chip guide">Guide</span></h3><p>A reusable practice for using AI well in a brewery, like "give brewing context every time." See the <a href="patterns.html">Patterns</a> page for the full set.</p></div>
+        <div class="term"><h3>Prompt <span class="chip ai">AI</span></h3><p>What you type to ask or brief the tool. The guide's image is "how you brief the apprentice" — the better the brief, the better the answer.</p></div>
+      </div>
+
+      <div class="letter-group" data-letter="R">
+        <h2 class="letter">R</h2>
+        <div class="term"><h3>Reasoning <span class="chip ai">AI</span></h3><p>The working an AI shows behind an answer. Asking for it makes a claim far easier to check, and often makes the tool catch its own mistake.</p></div>
+        <div class="term"><h3>Red flag <span class="chip guide">Guide</span></h3><p>A warning sign that an answer may be wrong — a precise number with no working, a confident claim about something recent, a citation you cannot find.</p></div>
+      </div>
+
+      <div class="letter-group" data-letter="S">
+        <h2 class="letter">S</h2>
+        <div class="term"><h3>Sensory analysis <span class="chip brew">Brewing</span></h3><p>Evaluating beer by taste and aroma, often with a trained panel. The human judgement an AI tool supports but cannot replace.</p></div>
+        <div class="term"><h3>SOP (Standard Operating Procedure) <span class="chip brew">Brewing</span></h3><p>A written, repeatable process. Often a better tool than AI for a routine job — and useful context to give the tool for everything else.</p></div>
+      </div>
+
+      <div class="letter-group" data-letter="T">
+        <h2 class="letter">T</h2>
+        <div class="term"><h3>Training data <span class="chip ai">AI</span></h3><p>The examples a model learned from. It is fixed at a point in time, which is why a tool does not know this season's harvest or your latest batch.</p></div>
+      </div>
+
+      <div class="letter-group" data-letter="U">
+        <h2 class="letter">U</h2>
+        <div class="term"><h3>Units <span class="chip brew">Brewing</span></h3><p>The scale a measurement is recorded in — Plato or specific gravity, Celsius or Fahrenheit. Mixing them in one field quietly breaks calculations and confuses tools.</p></div>
+      </div>
+
+      <div class="letter-group" data-letter="V">
+        <h2 class="letter">V</h2>
+        <div class="term"><h3>Verification <span class="chip guide">Guide</span></h3><p>Checking an AI answer against the real brewhouse — your measurements, your experience, a small test batch — before acting on it.</p></div>
+      </div>
+
+      <p class="noresult" id="noresult">No terms match your search.</p>
+
+    </main>
+  </div>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <div class="gwordmark">Brewing Distilling + AI</div>
+      <div class="footer-links">
+        <a href="guidebook.html">All chapters</a>
+        <a href="patterns.html">Patterns</a>
+        <a href="index.html">Home</a>
+        <a href="https://github.com/AnkurNapa/brewing-distilling-ai">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Build A-Z index from the letter groups present
+    var groups = Array.from(document.querySelectorAll('.letter-group'));
+    var az = document.getElementById('az');
+    var present = {};
+    groups.forEach(function (g) { present[g.getAttribute('data-letter')] = true; g.id = 'letter-' + g.getAttribute('data-letter'); });
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').forEach(function (L) {
+      var a = document.createElement('a');
+      a.textContent = L;
+      if (present[L]) { a.href = '#letter-' + L; } else { a.className = 'disabled'; }
+      az.appendChild(a);
+    });
+
+    // Live search filter
+    var q = document.getElementById('q');
+    var terms = Array.from(document.querySelectorAll('.term'));
+    var noresult = document.getElementById('noresult');
+    q.addEventListener('input', function () {
+      var v = q.value.trim().toLowerCase();
+      var anyShown = false;
+      groups.forEach(function (g) {
+        var groupShown = false;
+        g.querySelectorAll('.term').forEach(function (t) {
+          var match = t.textContent.toLowerCase().indexOf(v) !== -1;
+          t.style.display = match ? '' : 'none';
+          if (match) { groupShown = true; anyShown = true; }
+        });
+        g.style.display = groupShown ? '' : 'none';
+      });
+      noresult.style.display = anyShown ? 'none' : 'block';
+    });
+  </script>
+
+</body>
+</html>
