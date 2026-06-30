@@ -1,0 +1,90 @@
+/* Shared styling for Brewing + AI Guidebook chapter article pages */
+:root {
+  --color-teal: #00695c;
+  --color-teal-deep: #06483f;
+  --color-pink: #ff4081;
+  --color-ink: rgba(0, 0, 0, 0.87);
+  --color-text: #3f3a34;
+  --color-fine: #3c4043;
+  --color-bg: #ffffff;
+  --color-section: #f0f6f5;
+  --color-card-border: #d8e6e1;
+
+  --font-display: "Poppins", "Google Sans", Roboto, sans-serif;
+  --font-body: "Open Sans", Helvetica, sans-serif;
+  --max-width: 1180px;
+  --measure: 720px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); font-size: 16px; line-height: 1.65; color: var(--color-text); background: #fff; -webkit-font-smoothing: antialiased; }
+.wrap { width: 100%; max-width: var(--max-width); margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 3rem); }
+.measure { max-width: var(--measure); margin: 0 auto; }
+a { text-decoration: none; }
+
+/* Pill nav */
+.topbar { background: #fff; border-bottom: 1px solid var(--color-card-border); }
+.topbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 0; flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: 0.6rem; font-family: var(--font-display); font-weight: 600; font-size: 1.2rem; color: var(--color-ink); }
+.brand .mark { width: 24px; height: 24px; }
+.pills { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.pill { font-family: var(--font-display); font-weight: 500; font-size: 0.85rem; padding: 0.45rem 1.05rem; border-radius: 999px; border: 1px solid var(--color-card-border); color: var(--color-teal); transition: background 0.2s ease; }
+.pill:hover { background: var(--color-section); }
+.pill.active { background: var(--color-teal-deep); color: #fff; border-color: var(--color-teal-deep); }
+
+/* Hero band */
+.chero { background: var(--color-teal-deep); color: #fff; }
+.chero-inner { padding: 3.5rem 0 3rem; }
+.chero .eyebrow { font-family: var(--font-display); font-weight: 600; font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase; color: #8fe0c4; margin-bottom: 0.9rem; }
+.chero h1 { font-family: var(--font-display); font-weight: 600; font-size: clamp(2.2rem, 1.6rem + 2.6vw, 3.4rem); line-height: 1.08; margin-bottom: 1.1rem; max-width: 18ch; }
+.chero p { font-size: 1.15rem; line-height: 1.5; color: rgba(255,255,255,0.9); max-width: 40rem; }
+.chero .meta { margin-top: 1.6rem; font-size: 0.9rem; color: rgba(255,255,255,0.7); }
+
+/* Article body */
+article { padding: 3.5rem 0 1rem; }
+article h2 { font-family: var(--font-display); font-weight: 600; font-size: 1.75rem; line-height: 1.2; color: var(--color-teal); margin: 2.6rem 0 0.9rem; }
+article h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.2rem; color: var(--color-ink); margin: 1.8rem 0 0.6rem; }
+article p { margin: 0 0 1.1rem; }
+article ul, article ol { margin: 0 0 1.3rem 1.2rem; }
+article li { margin-bottom: 0.5rem; }
+article strong { color: var(--color-ink); }
+.lead { font-size: 1.22rem; line-height: 1.55; color: var(--color-ink); margin-bottom: 1.6rem; }
+
+/* Callout boxes */
+.box { border-radius: 14px; padding: 1.5rem 1.7rem; margin: 1.8rem 0; }
+.box .label { font-family: var(--font-display); font-weight: 600; font-size: 0.78rem; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 0.6rem; display: block; }
+.box p:last-child, .box ul:last-child, .box li:last-child { margin-bottom: 0; }
+.box.try { background: var(--color-section); border: 1px solid var(--color-card-border); }
+.box.try .label { color: var(--color-teal); }
+.box.key { background: #fff4f8; border: 1px solid #ffd0e0; }
+.box.key .label { color: var(--color-pink); }
+
+/* Compare (vague vs better) */
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.8rem 0; }
+.compare .col { border-radius: 12px; padding: 1.2rem 1.3rem; font-size: 0.95rem; }
+.compare .bad { background: #fbe9ee; border: 1px solid #f3c6d3; }
+.compare .good { background: #e3f3ec; border: 1px solid #c3e3d4; }
+.compare .tag { font-family: var(--font-display); font-weight: 600; font-size: 0.75rem; letter-spacing: 0.6px; text-transform: uppercase; display: block; margin-bottom: 0.5rem; }
+.compare .bad .tag { color: #c23a63; }
+.compare .good .tag { color: var(--color-teal); }
+
+/* Prev / next */
+.pager { border-top: 1px solid var(--color-card-border); margin-top: 2.5rem; padding: 2rem 0 0; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.pager a { display: block; max-width: 22rem; }
+.pager .dir { font-family: var(--font-display); font-weight: 600; font-size: 0.75rem; letter-spacing: 0.6px; text-transform: uppercase; color: var(--color-pink); margin-bottom: 0.3rem; }
+.pager .ttl { font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; color: var(--color-teal); }
+.pager .next { text-align: right; margin-left: auto; }
+
+/* Footer */
+footer { background: var(--color-section); padding: 2.5rem 0; margin-top: 3rem; }
+.footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+.footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+.footer-links a { color: var(--color-fine); font-size: 13px; }
+.footer-links a:hover { color: var(--color-teal); }
+.gwordmark { font-family: var(--font-display); font-weight: 600; color: var(--color-teal); letter-spacing: 0.3px; }
+
+@media (max-width: 720px) {
+  .compare { grid-template-columns: 1fr; }
+  .pager .next { text-align: left; }
+}

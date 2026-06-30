@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chapter 2 — Brew Data + Record Keeping</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/chapter.css" />
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="index.html">
+        <svg class="mark" viewBox="0 0 24 24" fill="none"><path d="M4 14c2-1 4-1 6 0M6 18c2-1 4-1 6 0" stroke="#00695c" stroke-width="2" stroke-linecap="round"/><path d="M14 4c4 2 5 7 2 10-2-1-3-4-2-7" stroke="#7cc36a" stroke-width="2" stroke-linecap="round"/></svg>
+        Brewing + AI Guidebook
+      </a>
+      <nav class="pills">
+        <a class="pill active" href="guidebook.html">Chapters</a>
+        <a class="pill" href="literacy.html">Prompts</a>
+        <a class="pill" href="index.html">Home</a>
+      </nav>
+    </div>
+  </div>
+
+  <section class="chero">
+    <div class="wrap chero-inner">
+      <div class="eyebrow">Chapter 02</div>
+      <h1>Brew Data + Record Keeping</h1>
+      <p>An AI tool is only as good as the brewing records behind it. Decide what to capture, capture it cleanly, and learn to spot when your data cannot be trusted.</p>
+      <div class="meta">Brewing + AI Guidebook · ~8 min read</div>
+    </div>
+  </section>
+
+  <article>
+    <div class="wrap measure">
+
+      <p class="lead">Your brew log is a dataset. Treat it like one and almost every useful thing AI can do for your brewery becomes possible. Treat it casually, and even the best tool will quietly mislead you.</p>
+
+      <p>This is the least glamorous chapter and the most important. Nothing downstream — prediction, consistency checks, searching your own knowledge — works without records that are complete, consistent, and honest.</p>
+
+      <h2>What data does brewing AI actually need?</h2>
+      <p>You do not need a sensor on every valve. You need the handful of fields that describe each batch well enough to compare it to the next. For most breweries that is:</p>
+      <ul>
+        <li><strong>Recipe inputs</strong> — grain bill, hops, yeast strain and pitch rate, water profile, adjuncts, with quantities.</li>
+        <li><strong>Process</strong> — mash temperatures and times, boil length, fermentation temperature curve, dry-hop timing.</li>
+        <li><strong>Measurements</strong> — OG, FG, ABV, pH, IBU or bitterness where you have it, dates and tank IDs.</li>
+        <li><strong>Outcome</strong> — sensory notes, pass/fail against your quality definition from Chapter 1, and anything unusual that happened.</li>
+      </ul>
+
+      <div class="box key">
+        <span class="label">Key idea</span>
+        <p>The most valuable column in your log is the <strong>outcome</strong>. Inputs and process tell a tool what you did; the outcome tells it what that did to the beer. Without honest outcomes, there is nothing to learn from.</p>
+      </div>
+
+      <h2>Capture it cleanly</h2>
+      <p>Messy records are not just untidy — they actively break tools. A model cannot tell that "Maris", "Maris Otter", and "MO" are the same malt, or that one batch logged gravity in Plato and the next in specific gravity. A few habits prevent most of the damage:</p>
+      <ul>
+        <li><strong>One unit per field, always.</strong> Pick Plato or SG, Celsius or Fahrenheit, and never mix them in the same column.</li>
+        <li><strong>Consistent names.</strong> Spell ingredients and yeast strains the same way every time. A short pick-list beats free text.</li>
+        <li><strong>Dates and IDs on everything.</strong> Every batch needs a date and a tank or batch number so events can be put in order.</li>
+        <li><strong>Record the misses.</strong> Stuck fermentations, infections, and dumped batches are some of the most useful data you have. Do not quietly delete them.</li>
+      </ul>
+
+      <h2>Evaluate whether your data is any good</h2>
+      <p>Before trusting any answer built on your records, ask whether the records deserve that trust. Three quick checks catch most problems:</p>
+      <h3>Gaps</h3>
+      <p>How many batches are missing a final gravity, a fermentation temperature, or a sensory note? A tool will happily ignore the gaps and give you a confident answer based on the half of the data that is complete — which may not be representative.</p>
+      <h3>Errors</h3>
+      <p>Scan for impossible values: an FG above the OG, a 9% ABV on a session recipe, a mash at 9 degrees. These are usually typos, but a tool reads them as fact.</p>
+      <h3>Bias</h3>
+      <p>If you only kept good records when a batch went well, your data quietly tells the tool that everything works. The failures that would teach it the most are missing.</p>
+
+      <div class="box try">
+        <span class="label">Try this in your brewery</span>
+        <p>Export your last 20 batches into one sheet, one row each. Highlight every empty cell and every value that looks impossible. The pattern of what is missing — and which beers it is missing for — tells you exactly where your records are not yet ready for a tool to lean on.</p>
+      </div>
+
+      <h2>Start small</h2>
+      <p>You do not need three years of perfect data to begin. A clean, consistent log of one beer over a dozen batches is more useful than a sprawling, contradictory archive of everything. Get the habit right on one flagship, prove it helps, then widen it.</p>
+
+      <h2>Takeaways</h2>
+      <ul>
+        <li>Your brew log is a dataset; its quality sets the ceiling on what any tool can do.</li>
+        <li>Capture inputs, process, measurements, and — above all — honest outcomes.</li>
+        <li>One unit per field, consistent names, dates and IDs on everything.</li>
+        <li>Check for gaps, impossible values, and the missing failures before you trust a result.</li>
+      </ul>
+
+      <div class="pager">
+        <a class="prev" href="chapter-1.html">
+          <div class="dir">← Previous</div>
+          <div class="ttl">Brewing Goals + Defining Quality</div>
+        </a>
+        <a class="next" href="chapter-3.html">
+          <div class="dir">Next chapter →</div>
+          <div class="ttl">Understanding the Tool</div>
+        </a>
+      </div>
+
+    </div>
+  </article>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <div class="gwordmark">Brewing Distilling + AI</div>
+      <div class="footer-links">
+        <a href="guidebook.html">All chapters</a>
+        <a href="index.html">Home</a>
+        <a href="https://github.com/AnkurNapa/brewing-distilling-ai">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chapter 1 — Brewing Goals + Defining Quality</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/chapter.css" />
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="index.html">
+        <svg class="mark" viewBox="0 0 24 24" fill="none"><path d="M4 14c2-1 4-1 6 0M6 18c2-1 4-1 6 0" stroke="#00695c" stroke-width="2" stroke-linecap="round"/><path d="M14 4c4 2 5 7 2 10-2-1-3-4-2-7" stroke="#7cc36a" stroke-width="2" stroke-linecap="round"/></svg>
+        Brewing + AI Guidebook
+      </a>
+      <nav class="pills">
+        <a class="pill active" href="guidebook.html">Chapters</a>
+        <a class="pill" href="literacy.html">Prompts</a>
+        <a class="pill" href="index.html">Home</a>
+      </nav>
+    </div>
+  </div>
+
+  <section class="chero">
+    <div class="wrap chero-inner">
+      <div class="eyebrow">Chapter 01</div>
+      <h1>Brewing Goals + Defining Quality</h1>
+      <p>Even the best model fails if it does not help you make better beer. Before reaching for any tool, decide what "good" actually means for your brewery.</p>
+      <div class="meta">Brewing + AI Guidebook · ~7 min read</div>
+    </div>
+  </section>
+
+  <article>
+    <div class="wrap measure">
+
+      <p class="lead">It is tempting to start with the technology: which app, which model, which dashboard. That is the wrong end to start from. AI is only useful once you can say, in plain words, what you are trying to achieve and how you will know if you got there.</p>
+
+      <p>Brewers already do this instinctively at the kettle. You have a picture of the finished beer before the mill ever turns. This chapter is about making that picture explicit enough that a tool — or a new brewer, or your future self — could act on it.</p>
+
+      <h2>Start with the beer, not the tool</h2>
+      <p>A model does not know your house style. It has never tasted your water, your yeast, or the pale ale your regulars come back for. If you ask it to "improve my recipe" without a goal, it will give you a confident, generic answer that may have nothing to do with the beer you actually want.</p>
+      <p>So the first job is not technical at all. It is to write down what success looks like, in terms you could measure or taste.</p>
+
+      <h2>What "good" can mean</h2>
+      <p>Quality is never a single number. For most breweries it is a balance of four things, and naming which ones matter most for a given beer is half the work:</p>
+      <ul>
+        <li><strong>Flavor target</strong> — the sensory profile you are aiming for: balance, key descriptors, what must be present and what must be absent.</li>
+        <li><strong>Consistency</strong> — how close batch ten must taste to batch one. A flagship lager lives or dies on this; a one-off special does not.</li>
+        <li><strong>Cost</strong> — ingredient, energy, and labor cost per finished litre or hectolitre.</li>
+        <li><strong>Time</strong> — tank turns, time to package, how long a beer ties up capacity.</li>
+      </ul>
+      <p>A goal like "make it better" hides which of these you are willing to trade. "Hold the same flavor but shave two days off tank time" is something a tool, and a brewer, can actually work on.</p>
+
+      <div class="box key">
+        <span class="label">Key idea</span>
+        <p>A useful goal names a <strong>target</strong>, a <strong>measure</strong>, and a <strong>trade-off you accept</strong>. "Hit 4.8% ABV, clean fermentation, no diacetyl, without extending the lager by more than a day" is far more workable than "make a great lager."</p>
+      </div>
+
+      <h2>Write a quality definition you can check</h2>
+      <p>For each beer, a short, written quality definition turns vague intent into something you can hold an answer up against. It does not need to be long. A practical one covers:</p>
+      <ul>
+        <li><strong>Numbers and ranges</strong> — OG, FG, ABV, IBU, colour, pH, with acceptable spreads (for example FG 1.010 to 1.012, not a single point).</li>
+        <li><strong>Sensory descriptors</strong> — the three or four notes that must be there, and the off-flavors that are an automatic fail (diacetyl, DMS, acetaldehyde, oxidation).</li>
+        <li><strong>Pass / fail line</strong> — what sends a batch to sale, what sends it to blending, and what sends it down the drain.</li>
+      </ul>
+      <p>Once this exists, "is this AI suggestion any good?" has an answer. You check the suggestion against the definition instead of against a gut feeling you cannot share with your team.</p>
+
+      <h3>Vague goal vs. defined goal</h3>
+      <div class="compare">
+        <div class="col bad">
+          <span class="tag">Vague</span>
+          "Help me make a better IPA."
+        </div>
+        <div class="col good">
+          <span class="tag">Defined</span>
+          "Keep my IPA's hop character and 6.2% ABV, but reduce haze and lower my dry-hop cost by 15%. FG must stay 1.012 or below."
+        </div>
+      </div>
+      <p>The second version gives any tool — and any colleague — something to aim at, and gives you a clear way to judge what comes back.</p>
+
+      <h2>Where AI fits, once the goal is clear</h2>
+      <p>With a written goal and a quality definition in hand, AI stops being a magic box and becomes an assistant pointed at a specific job: suggest grain bills that hit a target gravity, flag which past batches drifted from spec, draft a tasting note, or talk through why a fermentation stalled. Every one of those is easier to judge because you already decided what good looks like.</p>
+
+      <div class="box try">
+        <span class="label">Try this in your brewery</span>
+        <p>Pick one flagship beer. In ten minutes, write its quality definition: target numbers with ranges, the must-have and must-not-have sensory notes, and the pass/fail line. Keep it to half a page. That single document is what makes every later chapter — data, trust, feedback — actually usable.</p>
+      </div>
+
+      <h2>Takeaways</h2>
+      <ul>
+        <li>Start with the beer and the goal, never with the tool.</li>
+        <li>"Good" is a balance of flavor, consistency, cost, and time — name which matter most for each beer.</li>
+        <li>A useful goal states a target, a measure, and a trade-off you accept.</li>
+        <li>A short written quality definition lets you judge any AI answer against something real.</li>
+      </ul>
+
+      <div class="pager">
+        <span></span>
+        <a class="next" href="chapter-2.html">
+          <div class="dir">Next chapter →</div>
+          <div class="ttl">Brew Data + Record Keeping</div>
+        </a>
+      </div>
+
+    </div>
+  </article>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <div class="gwordmark">Brewing Distilling + AI</div>
+      <div class="footer-links">
+        <a href="guidebook.html">All chapters</a>
+        <a href="index.html">Home</a>
+        <a href="https://github.com/AnkurNapa/brewing-distilling-ai">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
