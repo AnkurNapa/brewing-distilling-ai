@@ -84,6 +84,10 @@ footer { background: var(--color-section); padding: 2.5rem 0; margin-top: 3rem; 
 .footer-links a:hover { color: var(--color-teal); }
 .gwordmark { font-family: var(--font-display); font-weight: 600; color: var(--color-teal); letter-spacing: 0.3px; }
 
+/* Related-page pill links (use-case pages) */
+.rel { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-display); font-weight: 500; font-size: 0.85rem; color: var(--color-teal-deep); background: var(--color-section); padding: 0.5rem 1rem; border-radius: 999px; text-decoration: none; }
+.rel:hover { background: #e2efe9; }
+
 @media (max-width: 720px) {
   .compare { grid-template-columns: 1fr; }
   .pager .next { text-align: left; }

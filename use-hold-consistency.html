@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hold batches consistent · Brewing + AI</title>
+  <!-- seo:meta -->
+  <meta name="description" content="Use AI to spot drift in fermentation curves, temperatures, and pH against your own standard, so batch ten tastes like batch one." />
+  <link rel="canonical" href="https://ankurnapa.github.io/brewing-distilling-ai/use-hold-consistency.html" />
+  <meta name="theme-color" content="#06483f" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Brewing Distilling + AI" />
+  <meta property="og:title" content="Hold batches consistent · Brewing + AI" />
+  <meta property="og:description" content="Use AI to spot drift in fermentation curves, temperatures, and pH against your own standard, so batch ten tastes like batch one." />
+  <meta property="og:url" content="https://ankurnapa.github.io/brewing-distilling-ai/use-hold-consistency.html" />
+  <meta property="og:image" content="https://ankurnapa.github.io/brewing-distilling-ai/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Hold batches consistent · Brewing + AI" />
+  <meta name="twitter:description" content="Use AI to spot drift in fermentation curves, temperatures, and pH against your own standard, so batch ten tastes like batch one." />
+  <meta name="twitter:image" content="https://ankurnapa.github.io/brewing-distilling-ai/assets/og-image.png" />
+  <!-- /seo:meta -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/chapter.css" />
+  <!-- Google Analytics (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E8KS14EJ88"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-E8KS14EJ88');
+  </script>
+  <!-- /Google Analytics -->
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="index.html">
+        <svg class="mark" viewBox="0 0 24 24" fill="none"><path d="M4 14c2-1 4-1 6 0M6 18c2-1 4-1 6 0" stroke="#00695c" stroke-width="2" stroke-linecap="round"/><path d="M14 4c4 2 5 7 2 10-2-1-3-4-2-7" stroke="#7cc36a" stroke-width="2" stroke-linecap="round"/></svg>
+        Brewing + AI Guidebook
+      </a>
+      <nav class="pills">
+        <a class="pill" href="patterns.html">Patterns</a>
+        <a class="pill" href="guidebook.html">Chapters</a>
+        <a class="pill" href="literacy.html">Prompts</a>
+        <a class="pill" href="case-studies.html">Case Studies</a>
+        <a class="pill" href="glossary.html">Glossary</a>
+        <a class="pill" href="index.html">Home</a>
+      </nav>
+    </div>
+  </div>
+
+  <section class="chero">
+    <div class="wrap chero-inner">
+      <div class="eyebrow">How AI can help your brewhouse</div>
+      <h1>Hold batches consistent</h1>
+      <p>Use AI to spot drift in fermentation curves, temperatures, and pH against your own standard, so batch ten tastes like batch one.</p>
+      <div class="meta">Brewing + AI · practical use case</div>
+    </div>
+  </section>
+
+  <article>
+    <div class="wrap measure">
+
+      <p class="lead">Consistency is what turns a good beer into a flagship. AI can watch your batches against your own baseline and flag when one is drifting, before the difference reaches the glass.</p>
+
+      <h2>What it does</h2>
+      <p>Compare a batch in progress, or just finished, against your standard for that beer and highlight where it deviates: a fermentation running hotter, a gravity finishing high, a pH out of range.</p>
+
+      <h2>How it works, in brewing terms</h2>
+      <p>It needs two things: a defined standard for the beer (your quality definition) and clean records to compare against it. With those, spotting an outlier is straightforward pattern work.</p>
+
+      <h2>What you need to start</h2>
+      <p>A written standard for the beer (see defining quality) and consistent batch records with the same fields captured every time.</p>
+
+      <div class="box try">
+        <span class="label">Example prompt</span>
+        <p>"Here are my last 12 lager batches with fermentation temps and final gravities, and here is batch 13. Which of batch 13’s numbers fall outside the pattern of the previous 12?"</p>
+      </div>
+
+      <h2>Keeping the brewer in control</h2>
+      <p>The tool flags the drift; the brewer decides what to do about it. Adjustments to a live batch are always a human call.</p>
+
+      <h2>Takeaways</h2>
+      <ul>
+        <li>Compare each batch against your own standard.</li>
+        <li>You need a defined standard and clean, consistent records.</li>
+        <li>It flags outliers; it does not fix them.</li>
+        <li>Any adjustment to a live batch stays a human decision.</li>
+      </ul>
+
+      <div class="pager">
+        <a class="prev" href="index.html">
+          <div class="dir">&larr; Back to</div>
+          <div class="ttl">How AI helps your brewhouse</div>
+        </a>
+        <a class="next" href="guidebook.html">
+          <div class="dir">Go deeper &rarr;</div>
+          <div class="ttl">The full guidebook</div>
+        </a>
+      </div>
+
+      <div style="margin-top:1.5rem; display:flex; flex-wrap:wrap; gap:0.5rem;">
+        <a class="rel" href="chapter-1.html">Chapter 1 · Defining Quality</a>
+        <a class="rel" href="chapter-2.html">Chapter 2 · Brew Data</a>
+      </div>
+
+    </div>
+  </article>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <div class="gwordmark">Brewing Distilling + AI</div>
+      <div class="footer-links">
+        <a href="guidebook.html">All chapters</a>
+        <a href="index.html">Home</a>
+        <a href="https://www.linkedin.com/in/ankur-napa/" target="_blank" rel="noopener">Built by Ankur Napa</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

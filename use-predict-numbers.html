@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Predict your numbers · Brewing + AI</title>
+  <!-- seo:meta -->
+  <meta name="description" content="Use AI to estimate OG, FG, ABV, and attenuation before you brew, so a new recipe or grain bill holds fewer surprises." />
+  <link rel="canonical" href="https://ankurnapa.github.io/brewing-distilling-ai/use-predict-numbers.html" />
+  <meta name="theme-color" content="#06483f" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Brewing Distilling + AI" />
+  <meta property="og:title" content="Predict your numbers · Brewing + AI" />
+  <meta property="og:description" content="Use AI to estimate OG, FG, ABV, and attenuation before you brew, so a new recipe or grain bill holds fewer surprises." />
+  <meta property="og:url" content="https://ankurnapa.github.io/brewing-distilling-ai/use-predict-numbers.html" />
+  <meta property="og:image" content="https://ankurnapa.github.io/brewing-distilling-ai/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Predict your numbers · Brewing + AI" />
+  <meta name="twitter:description" content="Use AI to estimate OG, FG, ABV, and attenuation before you brew, so a new recipe or grain bill holds fewer surprises." />
+  <meta name="twitter:image" content="https://ankurnapa.github.io/brewing-distilling-ai/assets/og-image.png" />
+  <!-- /seo:meta -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/chapter.css" />
+  <!-- Google Analytics (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E8KS14EJ88"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-E8KS14EJ88');
+  </script>
+  <!-- /Google Analytics -->
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="index.html">
+        <svg class="mark" viewBox="0 0 24 24" fill="none"><path d="M4 14c2-1 4-1 6 0M6 18c2-1 4-1 6 0" stroke="#00695c" stroke-width="2" stroke-linecap="round"/><path d="M14 4c4 2 5 7 2 10-2-1-3-4-2-7" stroke="#7cc36a" stroke-width="2" stroke-linecap="round"/></svg>
+        Brewing + AI Guidebook
+      </a>
+      <nav class="pills">
+        <a class="pill" href="patterns.html">Patterns</a>
+        <a class="pill" href="guidebook.html">Chapters</a>
+        <a class="pill" href="literacy.html">Prompts</a>
+        <a class="pill" href="case-studies.html">Case Studies</a>
+        <a class="pill" href="glossary.html">Glossary</a>
+        <a class="pill" href="index.html">Home</a>
+      </nav>
+    </div>
+  </div>
+
+  <section class="chero">
+    <div class="wrap chero-inner">
+      <div class="eyebrow">How AI can help your brewhouse</div>
+      <h1>Predict your numbers</h1>
+      <p>Use AI to estimate OG, FG, ABV, and attenuation before you brew, so a new recipe or grain bill holds fewer surprises.</p>
+      <div class="meta">Brewing + AI · practical use case</div>
+    </div>
+  </section>
+
+  <article>
+    <div class="wrap measure">
+
+      <p class="lead">Estimating where a beer will land before brew day is one of the most concrete things AI can help with. Done well, it turns a new recipe from a gamble into an informed plan.</p>
+
+      <h2>What it does</h2>
+      <p>Given a recipe and a little history, a tool can estimate original gravity, final gravity, ABV, and attenuation, and flag where a change to the grain bill or yeast is likely to move them. It is a fast sanity check, not a replacement for your hydrometer.</p>
+
+      <h2>How it works, in brewing terms</h2>
+      <p>The tool combines textbook relationships (fermentables to gravity, gravity to ABV) with whatever you tell it about your own kit. The single biggest lever is your real numbers: your actual mash efficiency and how far each yeast strain attenuates for you. Feed it those and the estimate stops being generic.</p>
+
+      <h2>What you need to start</h2>
+      <p>A recipe with quantities, your typical mash efficiency, and the attenuation you usually see from the yeast in question. A dozen past batches of the same style make the estimate far sharper.</p>
+
+      <div class="box try">
+        <span class="label">Example prompt</span>
+        <p>"For a pale ale: 5 kg Maris Otter, 0.5 kg crystal 60, 25 L batch, my mash efficiency runs 68%, US-05 usually attenuates 78% for me. Estimate OG, FG, and ABV, and show your working."</p>
+      </div>
+
+      <h2>Keeping the brewer in control</h2>
+      <p>Treat the estimate as a hypothesis to confirm on the day. Your hydrometer is the authority. If the tool disagrees with a hundred of your own batches, your batches win.</p>
+
+      <h2>Takeaways</h2>
+      <ul>
+        <li>Estimate OG, FG, ABV, and attenuation before brew day.</li>
+        <li>Feed it your real efficiency and attenuation, not generic figures.</li>
+        <li>Ask for the working so you can check it.</li>
+        <li>Confirm with measurement; the hydrometer decides.</li>
+      </ul>
+
+      <div class="pager">
+        <a class="prev" href="index.html">
+          <div class="dir">&larr; Back to</div>
+          <div class="ttl">How AI helps your brewhouse</div>
+        </a>
+        <a class="next" href="guidebook.html">
+          <div class="dir">Go deeper &rarr;</div>
+          <div class="ttl">The full guidebook</div>
+        </a>
+      </div>
+
+      <div style="margin-top:1.5rem; display:flex; flex-wrap:wrap; gap:0.5rem;">
+        <a class="rel" href="chapter-4.html">Chapter 4 · Trust + Verification</a>
+        <a class="rel" href="chapter-2.html">Chapter 2 · Brew Data</a>
+      </div>
+
+    </div>
+  </article>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <div class="gwordmark">Brewing Distilling + AI</div>
+      <div class="footer-links">
+        <a href="guidebook.html">All chapters</a>
+        <a href="index.html">Home</a>
+        <a href="https://www.linkedin.com/in/ankur-napa/" target="_blank" rel="noopener">Built by Ankur Napa</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
