@@ -370,8 +370,8 @@
   <section class="latest" id="latest">
     <div class="wrap">
       <h2>Latest from the blog</h2>
-      <p class="lede">Deeper, practitioner-grounded writing on AI and data across beer, wine, and whiskey, from the main Beer, Wine, Whiskey &amp; AI blog.</p>
-      <div class="post-cards">
+      <p class="lede">Deeper, practitioner-grounded writing on AI and data across beer, wine, and whiskey, from the main Beer, Wine, Whiskey &amp; AI blog. Updated automatically as new pieces publish.</p>
+      <div class="post-cards" id="post-cards" data-feed="https://ankurnapa.github.io/feed.xml">
 
         <article class="post-card">
           <div class="kicker">Brewery Lab &middot; 6-part series</div>
@@ -423,6 +423,69 @@
           el.classList.remove("swap");
         }, 350);
       }, 2400);
+    })();
+  </script>
+
+  <!-- Auto-pull the latest blog posts from the RSS feed (same-origin). -->
+  <script>
+    (function () {
+      var mount = document.getElementById("post-cards");
+      if (!mount || !window.fetch || !window.DOMParser) return;
+      var feed = mount.getAttribute("data-feed");
+      var N = 3;
+      var TRACKS = {
+        "brewing-science": "Brewing Science & AI",
+        "brewery-lab-ai": "Brewery Lab Series",
+        "winemaking": "Winemaking & AI",
+        "winemaking-ai": "Winemaking & AI",
+        "distilling-maturation": "Distilling & Maturation",
+        "generative-ai": "Generative AI",
+        "machine-learning": "Machine Learning",
+        "commercial-planning": "Commercial Planning",
+        "sales-forecasting": "Sales Forecasting",
+        "esg": "ESG"
+      };
+      function label(slug) {
+        if (TRACKS[slug]) return TRACKS[slug];
+        return (slug || "From the blog").replace(/-/g, " ").replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+      }
+      function clip(s, n) {
+        s = (s || "").trim();
+        return s.length > n ? s.slice(0, n).replace(/\s+\S*$/, "") + "…" : s;
+      }
+      function text(el, cls, str) {
+        var e = document.createElement(el);
+        if (cls) e.className = cls;
+        e.textContent = str;
+        return e;
+      }
+      fetch(feed, { cache: "no-cache" })
+        .then(function (r) { if (!r.ok) throw 0; return r.text(); })
+        .then(function (xml) {
+          var doc = new DOMParser().parseFromString(xml, "application/xml");
+          if (doc.querySelector("parsererror")) return;
+          var items = Array.prototype.slice.call(doc.querySelectorAll("item")).slice(0, N);
+          if (!items.length) return;
+          var frag = document.createDocumentFragment();
+          items.forEach(function (it) {
+            var g = function (t) { var e = it.querySelector(t); return e ? e.textContent : ""; };
+            var cat = it.querySelector("category");
+            var card = document.createElement("article");
+            card.className = "post-card";
+            card.appendChild(text("div", "kicker", label(cat ? cat.textContent : "")));
+            card.appendChild(text("h3", null, g("title")));
+            card.appendChild(text("p", null, clip(g("description"), 150)));
+            var a = document.createElement("a");
+            a.className = "cta";
+            a.href = g("link");
+            a.textContent = "Read the piece";
+            card.appendChild(a);
+            frag.appendChild(card);
+          });
+          mount.innerHTML = "";           // drop the static fallback cards
+          mount.appendChild(frag);        // replace with the live latest
+        })
+        .catch(function () { /* keep the static fallback cards */ });
     })();
   </script>
 
