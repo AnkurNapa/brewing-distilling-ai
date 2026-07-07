@@ -118,6 +118,19 @@
   .latest .all-link { margin-top: 2.25rem; }
   @media (max-width: 820px) { .post-cards { grid-template-columns: 1fr; gap: 1.25rem; } }
 
+  /* CTA buttons + consulting band */
+  .btn-row { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.6rem; }
+  .btn { font-family: var(--font-display); font-weight: 600; font-size: 0.9rem; padding: 0.7rem 1.4rem; border-radius: 999px; display: inline-flex; align-items: center; gap: 0.4rem; transition: opacity 0.2s ease, background 0.2s ease; }
+  .btn-primary { background: var(--color-pink); color: #fff; }
+  .btn-primary:hover { opacity: 0.9; }
+  .btn-secondary { background: #fff; color: var(--color-teal); border: 1px solid #d4e4de; }
+  .btn-secondary:hover { background: var(--color-section); }
+  .hire { background: #06483f; }
+  .hire .wrap { padding-top: var(--space-section); padding-bottom: var(--space-section); }
+  .hire h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.8rem, 1.3rem + 2vw, 2.5rem); line-height: 1.05; color: #fff; margin-bottom: 0.6rem; }
+  .hire p { color: #cfe6df; max-width: 42rem; font-size: 15px; line-height: 1.6; margin-bottom: 0; }
+  .hire .btn-row { margin-top: 1.6rem; }
+
   footer { padding: 3rem 0; text-align: center; }
   .footer-links { display: flex; gap: 2rem; justify-content: center; margin-bottom: 1.5rem; }
   .footer-links a { color: var(--color-fine); font-size: 13px; }
@@ -171,6 +184,10 @@
       <h1>AI, explained in <span class="rotator" id="rotator">plain English</span></h1>
       <p>No hype, no jargon. A clear look at what this technology actually is, and the practical ways it can help in the brewhouse and the still room.</p>
       <p>If you can read a brew log, you can understand AI. It is a tool that learns patterns from brewing data, and you stay the brewer in charge of every decision.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="https://ankurnapa.github.io/contact/">Discuss a project &#8594;</a>
+        <a class="btn btn-secondary" href="guidebook.html">Start the guidebook</a>
+      </div>
     </div>
     <div class="hero-art">
       <svg viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -363,6 +380,17 @@
         AI will not taste your beer, pull your tanks, or replace an experienced brewer. It is a tool. The brewers and distillers who learn to use it <span class="hl">thoughtfully and critically</span> will get the most from it, while staying firmly in charge of the craft.
       </blockquote>
       <cite>Our honest take</cite>
+    </div>
+  </section>
+
+  <!-- CONSULTING CTA -->
+  <section class="hire">
+    <div class="wrap">
+      <h2>AI for drinks producers, from someone who has run the brewhouse</h2>
+      <p>Ankur Napa spent a decade in breweries (AB InBev, SABMiller, United Breweries) before building AI and data tools for beer, wine, and spirits. Select consulting engagements in demand forecasting, quality and process analytics, dashboards, and production-grade GenAI.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="https://ankurnapa.github.io/contact/">Discuss a project &#8594;</a>
+      </div>
     </div>
   </section>
 
