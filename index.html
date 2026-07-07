@@ -477,7 +477,9 @@
             card.appendChild(text("p", null, clip(g("description"), 150)));
             var a = document.createElement("a");
             a.className = "cta";
-            a.href = g("link");
+            var href = g("link");
+            // Only accept http(s) links from the feed; block javascript:/data: URLs.
+            a.href = /^https?:\/\//i.test(href) ? href : "https://ankurnapa.github.io/";
             a.textContent = "Read the piece";
             card.appendChild(a);
             frag.appendChild(card);
